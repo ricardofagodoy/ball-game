@@ -1,4 +1,3 @@
-const LAVA = 13
 const MAP_KEY = 'map'
 const TILES_KEY = 'tiles'
 
@@ -16,19 +15,17 @@ export default class Map {
         this.map = this.scene.make.tilemap({ key: MAP_KEY});
 
         const tiles = this.map.addTilesetImage('tiles', TILES_KEY);
-        const ground = this.map.createStaticLayer("Ground", tiles, 0, 0);
+        const ground = this.map.createDynamicLayer("Ground", tiles, 0, 0);
     
         this.map.setCollisionByProperty({ collides: true });
-
-        this.scene.physics.world.bounds.width = ground.width;
-        this.scene.physics.world.bounds.height = ground.height;
+        this.scene.matter.world.convertTilemapLayer(ground);
 
         return ground
     }
 
     createDoors() {
     
-        const doors = this.scene.add.group();
+        /*const doors = this.scene.add.group();
 
         // Finish Door
         const finishDoor : any = this.map.findObject("Objects", obj => obj.name === "Finish");
@@ -42,7 +39,7 @@ export default class Map {
 
         doors.add(door)
 
-        return doors
+        return doors */
     }
 
     createEnemies() {
@@ -63,7 +60,7 @@ export default class Map {
       }*/
     }
 
-    addLavaCollision(callback) {
-        this.map.setTileIndexCallback(LAVA, callback, this.scene)    
+    addSpikesCollision(callback) {
+        //this.map.setTileIndexCallback(LAVA, callback, this.scene)    
     }
 }

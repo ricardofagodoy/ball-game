@@ -5,17 +5,21 @@ const width = window.innerWidth //* window.devicePixelRatio
 const height = window.innerHeight //* window.devicePixelRatio
 
 const config: GameConfig = {
-  width: 300,
-  height: 600,
+  width: 400,
+  height: 700,
   type: Phaser.AUTO,
   parent: "game",
   scene: GameScene,
   backgroundColor: '#FFF',
   physics: {
-    default: "arcade",
-    arcade: {
-      gravity: { y: 800 },
-      debug: false
+    default: "matter",
+    matter: {
+      setBounds: {
+        width: 400,
+        height: 700,
+    },
+      gravity: { y: 1 },
+      debug: true
     }
   }
 };

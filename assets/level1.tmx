@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="8" height="14" tilewidth="50" tileheight="50" infinite="0" nextobjectid="1">
+ <tileset firstgid="1" name="tiles" tilewidth="50" tileheight="50" tilecount="7" columns="7">
+  <image source="tiles.png" trans="ff00ff" width="360" height="50"/>
+  <tile id="0">
+   <properties>
+    <property name="collides" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="collides" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="collides" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="collides" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="collides" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="collides" type="bool" value="false"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="collides" type="bool" value="true"/>
+   </properties>
+   <objectgroup draworder="index">
+    <object id="3" x="0.25" y="42.25" width="49.75" height="8"/>
+   </objectgroup>
+  </tile>
+ </tileset>
+ <layer name="Ground" width="8" height="14">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+7,7,7,7,7,7,7,0,
+0,0,0,0,0,0,0,0,
+0,7,7,7,7,7,7,7,
+0,0,0,0,0,0,0,0,
+7,7,7,0,0,0,7,7,
+0,0,0,0,0,0,0,0,
+7,7,1,1,1,7,0,0,
+0,0,0,0,0,0,0,0,
+0,0,0,7,7,7,1,1,
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,
+7,7,7,7,7,7,7,7
+</data>
+ </layer>
+</map>
