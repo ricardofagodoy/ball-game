@@ -29,7 +29,7 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
 
     update() {}
 
-    respawn(sprite) {
-        sprite.setPosition(this.spawnX, this.spawnY)
+    respawn() {
+        this.setPosition(this.spawnX, this.spawnY)
     }
 }

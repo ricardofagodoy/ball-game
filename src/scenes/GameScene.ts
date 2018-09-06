@@ -1,5 +1,3 @@
-import PhaserMatterCollisionPlugin from "phaser-matter-collision-plugin"
-
 import Map from '../sprites/Map'
 import Ball from '../sprites/Ball'
 import Adventurer from '../sprites/Ball'
@@ -12,14 +10,6 @@ class GameScene extends Phaser.Scene {
 
     constructor() {
         super({key: 'GameScene'});
-    }
-
-    plugins() {
-        return [{
-            plugin: PhaserMatterCollisionPlugin, // The plugin class
-            key: "matterCollision", // Where to store in Scene.Systems, e.g. scene.sys.matterCollision
-            mapping: "matterCollision" // Where to store in the Scene, e.g. scene.matterCollision
-        }]
     }
 
     preload () {
@@ -38,11 +28,12 @@ class GameScene extends Phaser.Scene {
         this.ground = new Map(this).createGround()
         this.add.graphics().strokeRect(0, 0, 400, 700)
 
-        this.player = new Ball(this, 200, 20)
+        this.player = new Ball(this, 200, 50)
 
         // Basic controls
         this.cursors = this.input.keyboard.createCursorKeys();
 
+        // Collision
         this.matter.world.on("collisionstart", event => {
             event.pairs.forEach(pair => {
 
@@ -50,6 +41,9 @@ class GameScene extends Phaser.Scene {
         
                 const gameObjectA = bodyA.gameObject;
                 const gameObjectB = bodyB.gameObject;
+
+                if (gameObjectA == null || gameObjectB == null)
+                    return
                 
                 if (gameObjectA instanceof Phaser.Physics.Matter.TileBody)
                     this.collide(gameObjectB, gameObjectA)
@@ -70,12 +64,9 @@ class GameScene extends Phaser.Scene {
         this.player.update()
     }
 
-    collide(ball : Phaser.Physics.Matter.Sprite, tile : Phaser.Physics.Matter.TileBody) {
-        
-        if (ball != null && tile != null) {
-            console.log(tile.tile.index)
-            ball.setVelocityY(-3)
-        }
+    collide(ball : Ball, tile : Phaser.Physics.Matter.TileBody) {
+        if (tile.tile.index == 1) // spike
+            ball.respawn()
     }
 }
 
