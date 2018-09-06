@@ -1,6 +1,3 @@
-const MAP_KEY = 'map'
-const TILES_KEY = 'tiles'
-
 export default class Map {
     
     private scene : Phaser.Scene;
@@ -12,11 +9,12 @@ export default class Map {
 
     createGround() {
 
-        this.map = this.scene.make.tilemap({ key: MAP_KEY});
+        this.map = this.scene.make.tilemap({ key: 'map'});
 
-        const tiles = this.map.addTilesetImage('tiles', TILES_KEY);
+        const tiles = this.map.addTilesetImage('tiles', 'tiles');
         const ground = this.map.createDynamicLayer("Ground", tiles, 0, 0);
     
+        // Collision
         this.map.setCollisionByProperty({ collides: true });
         this.scene.matter.world.convertTilemapLayer(ground);
 
@@ -58,9 +56,5 @@ export default class Map {
         });
         return result;
       }*/
-    }
-
-    addSpikesCollision(callback) {
-        //this.map.setTileIndexCallback(LAVA, callback, this.scene)    
     }
 }

@@ -2,7 +2,7 @@ const KEY = 'ball'
 
 export default class Ball extends Phaser.Physics.Matter.Sprite {
    
-    private speed : number = 10;
+    private speed : number = 2;
     private spawnX : number;
     private spawnY : number;
 
@@ -16,7 +16,7 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
         this.scene.add.existing(this)
         this.setCircle(25, {})
 
-        this.setBounce(0.3);
+        this.setBounce(1);
     }
 
     moveLeft() {
@@ -27,9 +27,7 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
         this.setVelocityX(this.speed);
     }
 
-    idle() {
-        this.setVelocityX(0);
-    }
+    update() {}
 
     respawn(sprite) {
         sprite.setPosition(this.spawnX, this.spawnY)

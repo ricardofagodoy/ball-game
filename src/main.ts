@@ -14,10 +14,7 @@ const config: GameConfig = {
   physics: {
     default: "matter",
     matter: {
-      setBounds: {
-        width: 400,
-        height: 700,
-    },
+      setBounds: { width: 400, height: 700,},
       gravity: { y: 1 },
       debug: true
     }
