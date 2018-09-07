@@ -16,7 +16,7 @@ const config: GameConfig = {
     matter: {
       setBounds: { width: 400, height: 700,},
       gravity: { y: 1 },
-      debug: false
+      debug: true
     }
   }
 };

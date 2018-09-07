@@ -1,11 +1,10 @@
 import Map from '../sprites/Map'
 import Ball from '../sprites/Ball'
-import Adventurer from '../sprites/Ball'
 
 class GameScene extends Phaser.Scene {
 
-    private ground : Phaser.Tilemaps.DynamicTilemapLayer
-    private player : Adventurer
+    private map : Map
+    private player : Ball
     private cursors
 
     constructor() {
@@ -24,10 +23,10 @@ class GameScene extends Phaser.Scene {
     }
     
     create () {
-    
-        this.ground = new Map(this).createGround()
+        
         this.add.graphics().strokeRect(0, 0, 400, 700)
-
+        
+        this.map = new Map(this)
         this.player = new Ball(this, 200, 50)
 
         // Basic controls
@@ -56,15 +55,13 @@ class GameScene extends Phaser.Scene {
     update () {
     
         if (this.cursors.left.isDown) {
-            this.player.moveLeft()
+            this.map.moveGroundX(-0.1, this.player.y, 2)
         } else if (this.cursors.right.isDown) {
-            this.player.moveRight()
+            this.map.moveGroundX(0.1, this.player.y, 2)
         } 
-            
-        this.player.update()
     }
 
-    collide(ball : Ball, tile : Phaser.Physics.Matter.TileBody) {
+    collide (ball : Ball, tile : Phaser.Physics.Matter.TileBody) {
         if (tile.tile.index == 1) // spike
             ball.respawn()
     }
