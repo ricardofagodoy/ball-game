@@ -59,11 +59,15 @@ class GameScene extends Phaser.Scene {
         } else if (this.cursors.right.isDown) {
             this.map.moveGroundX(0.1, this.player.y, 2)
         } 
+
+        this.player.update()
     }
 
     collide (ball : Ball, tile : Phaser.Physics.Matter.TileBody) {
         if (tile.tile.index == 1) // spike
             ball.respawn()
+        else
+            ball.setVelocityY(-4)
     }
 }
 

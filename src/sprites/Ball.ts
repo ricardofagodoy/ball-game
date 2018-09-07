@@ -15,6 +15,7 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
 
         this.scene.add.existing(this)
         this.setCircle(25, {})
+        this.setScale(0.5)
 
         this.setBounce(1);
     }
@@ -27,7 +28,9 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
         this.setVelocityX(this.speed);
     }
 
-    update() {}
+    update() {
+        this.setX(this.spawnX)
+    }
 
     respawn() {
         this.setPosition(this.spawnX, this.spawnY)
