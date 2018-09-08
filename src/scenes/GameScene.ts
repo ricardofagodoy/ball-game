@@ -10,6 +10,7 @@ class GameScene extends Phaser.Scene {
     private levelText : Phaser.GameObjects.Text
     private textStyle = {font: "20px Arial", fill: "#000"}
     private level = 1
+    private groundSpeed = 0.1
 
     constructor() {
         super({key: 'GameScene'});
@@ -62,9 +63,9 @@ class GameScene extends Phaser.Scene {
     update () {
     
         if (this.cursors.left.isDown) {
-            this.map.moveGroundX(-0.1, this.ball.y, 1)
+            this.map.moveGroundX(-this.groundSpeed)
         } else if (this.cursors.right.isDown) {
-            this.map.moveGroundX(0.1, this.ball.y, 1)
+            this.map.moveGroundX(this.groundSpeed)
         } 
 
         this.ball.update()

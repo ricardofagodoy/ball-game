@@ -16,21 +16,18 @@ export default class Map {
         // Collision
         this.map.setCollisionByProperty({ collides: true });
         scene.matter.world.convertTilemapLayer(this.ground);
-
-        // Finish
-        //const finishObject : any = this.map.findObject("Objects", obj => obj.name === "Finish");
-        //this.scene.matter.add.gameObject(finishObject, {})
-        //finishObject.x += finishObject.width/2
     }
 
-    moveGroundX(offset : number, heightStart : number, heightOffset : number) {
-
-        const y = this.ground.worldToTileY(heightStart)
+    moveGroundX(offset : number) {
 
         this.ground.forEachTile((tile : Phaser.Tilemaps.Tile) => {
-            tile.x+=offset
-            tile.pixelX += tile.width * offset
-            this.scene.matter.world.convertTiles([tile])
-        }, undefined, undefined, y, undefined, undefined, { isNotEmpty: true })
+
+            //tile.x+=offset
+            //tile.pixelX += tile.width * offset
+            //this.scene.matter.world.convertTiles([tile])
+
+            
+
+        }, undefined, undefined, undefined, undefined, undefined, { isNotEmpty: true })
     }
 }
