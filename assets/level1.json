@@ -2,7 +2,7 @@
  "infinite":false,
  "layers":[
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 0, 6, 6, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 1, 1, 6, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 6, 6],
+         "data":[0, 0, 0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 6, 6, 6, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 0, 6, 6, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 6, 1, 1, 6, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 3, 0, 0, 0, 0, 6, 4, 5, 6, 6, 6, 6],
          "height":14,
          "name":"Ground",
          "opacity":1,
@@ -12,7 +12,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":1,
+ "nextobjectid":3,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.1.6",
@@ -33,23 +33,28 @@
             {
              "0":
                 {
-                 "collides":true
+                 "collides":true,
+                 "kill":true
                 },
              "1":
                 {
-                 "collides":false
+                 "collides":false,
+                 "finish":true
                 },
              "2":
                 {
-                 "collides":false
+                 "collides":false,
+                 "finish":true
                 },
              "3":
                 {
-                 "collides":false
+                 "collides":false,
+                 "finish":true
                 },
              "4":
                 {
-                 "collides":false
+                 "collides":false,
+                 "finish":true
                 },
              "5":
                 {
@@ -60,23 +65,28 @@
             {
              "0":
                 {
-                 "collides":"bool"
+                 "collides":"bool",
+                 "kill":"bool"
                 },
              "1":
                 {
-                 "collides":"bool"
+                 "collides":"bool",
+                 "finish":"bool"
                 },
              "2":
                 {
-                 "collides":"bool"
+                 "collides":"bool",
+                 "finish":"bool"
                 },
              "3":
                 {
-                 "collides":"bool"
+                 "collides":"bool",
+                 "finish":"bool"
                 },
              "4":
                 {
-                 "collides":"bool"
+                 "collides":"bool",
+                 "finish":"bool"
                 },
              "5":
                 {

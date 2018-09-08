@@ -5,7 +5,7 @@ const width = window.innerWidth //* window.devicePixelRatio
 const height = window.innerHeight //* window.devicePixelRatio
 
 const config: GameConfig = {
-  width: 400,
+  width: 420,
   height: 700,
   type: Phaser.AUTO,
   parent: "game",
@@ -14,7 +14,7 @@ const config: GameConfig = {
   physics: {
     default: "matter",
     matter: {
-      setBounds: { width: 400, height: 700,},
+      setBounds: { width: 420, height: 700,},
       gravity: { y: 1 },
       debug: true
     }

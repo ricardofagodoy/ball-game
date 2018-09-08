@@ -4,8 +4,12 @@ import Ball from '../sprites/Ball'
 class GameScene extends Phaser.Scene {
 
     private map : Map
-    private player : Ball
-    private cursors
+    private ball : Ball
+    private cursors : CursorKeys
+
+    private levelText : Phaser.GameObjects.Text
+    private textStyle = {font: "20px Arial", fill: "#000"}
+    private level = 1
 
     constructor() {
         super({key: 'GameScene'});
@@ -24,15 +28,18 @@ class GameScene extends Phaser.Scene {
     
     create () {
         
-        this.add.graphics().strokeRect(0, 0, 400, 700)
+        // Screen (adjust)
+        this.add.graphics().strokeRect(0, 0, 420, 700)
+        this.add.text(10, 10, 'Level ', this.textStyle)
+        this.levelText = this.add.text(65, 10, this.level.toString(), this.textStyle)
         
         this.map = new Map(this)
-        this.player = new Ball(this, 200, 50)
+        this.ball = new Ball(this, 200, 50)
 
         // Basic controls
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        // Collision
+        // Ball Collision
         this.matter.world.on("collisionstart", event => {
             event.pairs.forEach(pair => {
 
@@ -44,10 +51,10 @@ class GameScene extends Phaser.Scene {
                 if (gameObjectA == null || gameObjectB == null)
                     return
                 
-                if (gameObjectA instanceof Phaser.Physics.Matter.TileBody)
-                    this.collide(gameObjectB, gameObjectA)
-                else
-                    this.collide(gameObjectA, gameObjectB)
+                if (gameObjectA instanceof Ball)
+                    (<Ball>gameObjectA).collide(gameObjectB)
+                else if (gameObjectB instanceof Ball)
+                    (<Ball>gameObjectB).collide(gameObjectA)
             })
         })
     }
@@ -55,19 +62,17 @@ class GameScene extends Phaser.Scene {
     update () {
     
         if (this.cursors.left.isDown) {
-            this.map.moveGroundX(-0.1, this.player.y, 2)
+            this.map.moveGroundX(-0.1, this.ball.y, 1)
         } else if (this.cursors.right.isDown) {
-            this.map.moveGroundX(0.1, this.player.y, 2)
+            this.map.moveGroundX(0.1, this.ball.y, 1)
         } 
 
-        this.player.update()
+        this.ball.update()
     }
 
-    collide (ball : Ball, tile : Phaser.Physics.Matter.TileBody) {
-        if (tile.tile.index == 1) // spike
-            ball.respawn()
-        else
-            ball.setVelocityY(-4)
+    nextLevel() {
+        this.levelText.setText((++this.level).toString())
+        this.ball.respawn()
     }
 }
 

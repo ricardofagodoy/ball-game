@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="7" height="14" tilewidth="60" tileheight="50" infinite="0" nextobjectid="1">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="7" height="14" tilewidth="60" tileheight="50" infinite="0" nextobjectid="3">
  <tileset firstgid="1" name="tiles" tilewidth="60" tileheight="50" tilecount="6" columns="6">
   <image source="tiles.png" trans="ff00ff" width="360" height="50"/>
   <tile id="0">
    <properties>
     <property name="collides" type="bool" value="true"/>
+    <property name="kill" type="bool" value="true"/>
    </properties>
    <objectgroup draworder="index">
     <object id="1" x="0.5" y="49.25">
@@ -15,21 +16,25 @@
   <tile id="1">
    <properties>
     <property name="collides" type="bool" value="false"/>
+    <property name="finish" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="2">
    <properties>
     <property name="collides" type="bool" value="false"/>
+    <property name="finish" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="3">
    <properties>
     <property name="collides" type="bool" value="false"/>
+    <property name="finish" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="4">
    <properties>
     <property name="collides" type="bool" value="false"/>
+    <property name="finish" type="bool" value="true"/>
    </properties>
   </tile>
   <tile id="5">
@@ -55,8 +60,8 @@
 6,6,1,1,6,0,6,
 0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,
-6,6,6,6,6,6,6
+0,2,3,0,0,0,0,
+6,4,5,6,6,6,6
 </data>
  </layer>
 </map>
