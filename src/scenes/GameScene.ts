@@ -8,9 +8,9 @@ class GameScene extends Phaser.Scene {
     private cursors : CursorKeys
 
     private levelText : Phaser.GameObjects.Text
-    private textStyle = {font: "20px Arial", fill: "#000"}
+    private textStyle = {font: "20px Arial", fill: "#FFF"}
     private level = 1
-    private groundSpeed = 0.1
+    private groundSpeed = 5
 
     constructor() {
         super({key: 'GameScene'});
@@ -19,23 +19,22 @@ class GameScene extends Phaser.Scene {
     preload () {
 
         // Map and tiles
-        this.load.image('tiles', 'assets/tiles.png');
-        this.load.tilemapTiledJSON('map', 'assets/level1.json');
+        this.load.image('tiles', 'assets/tiles2.png');
+        this.load.tilemapTiledJSON('map', 'assets/level2.json');
 
         // Main character
         this.load.spritesheet('ball', 'assets/ball.png',
-        { frameWidth: 60, frameHeight: 60 })
+        { frameWidth: 29, frameHeight: 29 })
     }
     
     create () {
         
-        // Screen (adjust)
-        this.add.graphics().strokeRect(0, 0, 420, 700)
+        // Text (adjust)
         this.add.text(10, 10, 'Level ', this.textStyle)
         this.levelText = this.add.text(65, 10, this.level.toString(), this.textStyle)
         
         this.map = new Map(this)
-        this.ball = new Ball(this, 200, 50)
+        this.ball = new Ball(this, 450/2, 50)
 
         // Basic controls
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -71,9 +70,15 @@ class GameScene extends Phaser.Scene {
         this.ball.update()
     }
 
+    killed() {
+        this.map.respawn()
+        this.ball.respawn()
+    }
+
     nextLevel() {
         this.levelText.setText((++this.level).toString())
         this.ball.respawn()
+        this.scene.restart()
     }
 }
 

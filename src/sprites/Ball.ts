@@ -2,7 +2,8 @@ import GameScene from '../scenes/GameScene'
 
 export default class Ball extends Phaser.Physics.Matter.Sprite {
    
-    private bounceSpeed = 4
+    private speed = 5
+    private bounceSpeed = 5
     private spawnX : number;
     private spawnY : number;
 
@@ -14,8 +15,8 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
         this.spawnY = y
 
         this.scene.add.existing(this)
-        this.setCircle(25, {})
-        this.setScale(0.5)
+        this.setCircle(13, {})
+        this.setScale(1)
     }
 
     update() {
@@ -27,14 +28,24 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
         if (object instanceof Phaser.Physics.Matter.TileBody) {
 
             if (object.tile.properties['kill'])
-                return this.respawn()
+            return (<GameScene>this.scene).killed()
 
             if (object.tile.properties['finish'])
                 return (<GameScene>this.scene).nextLevel()
 
-            this.setVelocityY(-this.bounceSpeed)
+            if (object.tile.properties['ground'])
+                return this.setVelocityY(-this.bounceSpeed)
         }
     }
+
+    right() {
+        this.setX(this.x + this.speed)
+    }
+
+    left() {
+        this.setX(this.x - this.speed)
+    }
+
 
     respawn() {
         this.setPosition(this.spawnX, this.spawnY)

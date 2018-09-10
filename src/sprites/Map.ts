@@ -9,25 +9,26 @@ export default class Map {
         this.scene = scene
 
         this.map = scene.make.tilemap({ key: 'map'});
-        const tiles = this.map.addTilesetImage('tiles', 'tiles');
+        const tiles = this.map.addTilesetImage('tiles');
 
         this.ground = this.map.createDynamicLayer("Ground", tiles, 0, 0);
     
-        // Collision
         this.map.setCollisionByProperty({ collides: true });
         scene.matter.world.convertTilemapLayer(this.ground);
     }
 
+    respawn() {
+        this.ground.setX(0)
+        this.scene.matter.world.convertTilemapLayer(this.ground);
+    }
+
     moveGroundX(offset : number) {
 
-        this.ground.forEachTile((tile : Phaser.Tilemaps.Tile) => {
+        const newX = this.ground.x + offset
 
-            //tile.x+=offset
-            //tile.pixelX += tile.width * offset
-            //this.scene.matter.world.convertTiles([tile])
-
-            
-
-        }, undefined, undefined, undefined, undefined, undefined, { isNotEmpty: true })
+        if (newX < this.ground.width/2 && newX > this.ground.width/2 * -1) {
+            this.ground.setX(this.ground.x + offset)
+            this.scene.matter.world.convertTilemapLayer(this.ground)
+        }
     }
 }
