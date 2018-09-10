@@ -4,17 +4,25 @@ export default class Map {
     private map : Phaser.Tilemaps.Tilemap;
     private ground : Phaser.Tilemaps.DynamicTilemapLayer
 
-    constructor(scene) {
+    constructor(scene, level) {
 
         this.scene = scene
 
         this.map = scene.make.tilemap({ key: 'map'});
         const tiles = this.map.addTilesetImage('tiles');
 
-        this.ground = this.map.createDynamicLayer("Ground", tiles, 0, 0);
+        this.ground = this.map.createDynamicLayer("level" + level, tiles, 0, 0);
     
         this.map.setCollisionByProperty({ collides: true });
         scene.matter.world.convertTilemapLayer(this.ground);
+    }
+
+    getHeight() {
+        return this.map.height
+    }
+
+    getNumberOfLayers() {
+        return this.map.layers.length
     }
 
     respawn() {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="10" height="14" tilewidth="45" tileheight="50" infinite="0" nextobjectid="1">
  <tileset firstgid="1" name="tiles" tilewidth="45" tileheight="50" tilecount="10" columns="10">
-  <image source="tiles2.png" width="450" height="50"/>
+  <image source="tiles.png" width="450" height="50"/>
   <tile id="0">
    <properties>
     <property name="collides" type="bool" value="true"/>
@@ -98,10 +98,10 @@
    </objectgroup>
   </tile>
  </tileset>
- <layer name="Ground" width="10" height="14">
+ <layer name="level2" width="10" height="14" visible="0">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,0,0,
+1,1,2,1,1,1,1,1,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,1,1,1,1,1,1,2,2,
 0,0,0,0,0,0,0,0,0,0,
@@ -113,7 +113,25 @@
 1,2,1,1,1,1,1,1,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-1,7,7,7,1,1,1,2,2,1
+7,7,1,2,2,1,1,2,2,1
+</data>
+ </layer>
+ <layer name="level1" width="10" height="14" visible="0">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,
+1,1,1,1,1,1,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,1,1,1,1,1,1,1,0,0,
+1,1,0,0,1,2,1,1,1,1,
+1,1,1,1,1,1,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,1,1,1,1,1,1,1,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+1,2,1,1,1,1,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+1,1,1,7,7,7,1,1,1,1
 </data>
  </layer>
 </map>

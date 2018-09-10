@@ -1,8 +1,8 @@
 import "phaser";
 import GameScene from "./scenes/GameScene";
 
-const width = window.innerWidth //* window.devicePixelRatio
-const height = window.innerHeight //* window.devicePixelRatio
+const width = window.innerWidth //* window.devicePixelRatio // 450
+const height = window.innerHeight //* window.devicePixelRatio // 700
 
 const config: GameConfig = {
   width: 450,
@@ -14,9 +14,8 @@ const config: GameConfig = {
   physics: {
     default: "matter",
     matter: {
-      setBounds: { width: 450, height: 700},
       gravity: { y: 1 },
-      debug: false
+      debug: true
     }
   }
 };
@@ -28,5 +27,5 @@ export class Game extends Phaser.Game {
 }
 
 window.onload = () => {
-  var game = new Game(config);
+  new Game(config);
 };
