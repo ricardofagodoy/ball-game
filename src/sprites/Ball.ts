@@ -38,15 +38,6 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
         }
     }
 
-    right() {
-        this.setX(this.x + this.speed)
-    }
-
-    left() {
-        this.setX(this.x - this.speed)
-    }
-
-
     respawn() {
         this.setPosition(this.spawnX, this.spawnY)
     }
