@@ -1,60 +1,42 @@
 export default class Map {
     
-    private scene : Phaser.Scene;
+    private scene : Phaser.Scene
     private map : Phaser.Tilemaps.Tilemap;
+    private ground : Phaser.Tilemaps.DynamicTilemapLayer
 
-    constructor(scene) {
-        this.scene = scene;
-    }
+    constructor(scene, level) {
 
-    createGround() {
+        this.scene = scene
 
-        this.map = this.scene.make.tilemap({ key: 'map'});
+        this.map = scene.make.tilemap({ key: 'map'});
+        const tiles = this.map.addTilesetImage('tiles');
 
-        const tiles = this.map.addTilesetImage('tiles', 'tiles');
-        const ground = this.map.createDynamicLayer("Ground", tiles, 0, 0);
+        this.ground = this.map.createDynamicLayer("level" + level, tiles, 0, 0);
     
-        // Collision
         this.map.setCollisionByProperty({ collides: true });
-        this.scene.matter.world.convertTilemapLayer(ground);
-
-        return ground
+        scene.matter.world.convertTilemapLayer(this.ground);
     }
 
-    createDoors() {
-    
-        /*const doors = this.scene.add.group();
-
-        // Finish Door
-        const finishDoor : any = this.map.findObject("Objects", obj => obj.name === "Finish");
-        
-        let door = this.scene.add.sprite(finishDoor.x, finishDoor.y, undefined).setOrigin(1, 1)
-        door.setSize(this.map.tileWidth, this.map.tileHeight)
-
-        this.scene.physics.add.existing(door)
-        door.body.immovable = true
-        door.body.moves = false
-
-        doors.add(door)
-
-        return doors */
+    getHeight() {
+        return this.map.height
     }
 
-    createEnemies() {
-        return false
+    getNumberOfLayers() {
+        return this.map.layers.length
+    }
 
-        /*findObjectsByType(type, map, layer) {
-        var result = new Array();
-        map.objects[layer].forEach(function(element){
-          if(element.properties.type === type) {
-            //Phaser uses top left, Tiled bottom left so we have to adjust the y position
-            //also keep in mind that the cup images are a bit smaller than the tile which is 16x16
-            //so they might not be placed in the exact pixel position as in Tiled
-            element.y -= map.tileHeight;
-            result.push(element);
-          }      
-        });
-        return result;
-      }*/
+    respawn() {
+        this.ground.setX(0)
+        this.scene.matter.world.convertTilemapLayer(this.ground);
+    }
+
+    moveGroundX(offset : number) {
+
+        const newX = this.ground.x + offset
+
+        if (newX < this.ground.width/2 && newX > this.ground.width/2 * -1) {
+            this.ground.setX(this.ground.x + offset)
+            this.scene.matter.world.convertTilemapLayer(this.ground)
+        }
     }
 }

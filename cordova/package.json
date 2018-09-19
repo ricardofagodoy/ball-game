@@ -1,0 +1,13 @@
+{
+  "name": "io.github.ricardofagodoy",
+  "version": "1.0.0",
+  "displayName": "Ball Game",
+  "cordova": {
+    "platforms": [
+      "android"
+    ]
+  },
+  "dependencies": {
+    "cordova-android": "~7.1.1"
+  }
+}

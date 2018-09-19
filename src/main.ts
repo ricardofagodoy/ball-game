@@ -1,32 +1,44 @@
 import "phaser";
 import GameScene from "./scenes/GameScene";
 
-const width = window.innerWidth //* window.devicePixelRatio
-const height = window.innerHeight //* window.devicePixelRatio
+let game
+//const width = window.innerWidth * window.devicePixelRatio
+//const height = window.innerHeight * window.devicePixelRatio
 
-const config: GameConfig = {
-  width: 400,
+const config: any = {
+  width: 450,
   height: 700,
   type: Phaser.AUTO,
-  parent: "game",
   scene: GameScene,
-  backgroundColor: '#FFF',
+  backgroundColor: 0x000000,
   physics: {
     default: "matter",
     matter: {
-      setBounds: { width: 400, height: 700,},
       gravity: { y: 1 },
       debug: false
     }
   }
 };
 
-export class Game extends Phaser.Game {
-  constructor(config: GameConfig) {
-    super(config);
+window.onload = () => {
+  game = new Phaser.Game(config);
+  window.focus();
+  resize();
+  window.addEventListener("resize", resize, false);
+};
+
+function resize() {
+  var canvas = document.querySelector("canvas");
+  var windowWidth = window.innerWidth;
+  var windowHeight = window.innerHeight;
+  var windowRatio = windowWidth / windowHeight;
+  var gameRatio = game.config.width / game.config.height;
+  if(windowRatio < gameRatio){
+      canvas.style.width = windowWidth + "px";
+      canvas.style.height = (windowWidth / gameRatio) + "px";
+  }
+  else{
+      canvas.style.width = (windowHeight * gameRatio) + "px";
+      canvas.style.height = windowHeight + "px";
   }
 }
-
-window.onload = () => {
-  var game = new Game(config);
-};
