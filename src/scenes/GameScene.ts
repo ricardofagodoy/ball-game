@@ -26,6 +26,13 @@ class GameScene extends Phaser.Scene {
         super({key: KEY})
     }
 
+    init() {
+        this.level = +window.localStorage.getItem('level') || 1
+
+        if (this.level == 1)
+            this.scene.switch('InstructionsScene')
+    }
+
     preload () {
 
         this.width = +this.scene.manager.game.config.width
@@ -38,8 +45,6 @@ class GameScene extends Phaser.Scene {
         // Main character
         this.load.spritesheet('ball', 'assets/ball.png',
         { frameWidth: 29, frameHeight: 29 })
-
-        this.level = +window.localStorage.getItem('level') || 1
     }
     
     create () {

@@ -1,6 +1,7 @@
 import "phaser";
 import GameScene from "./scenes/GameScene";
 import GameOverScene from "./scenes/GameOverScene";
+import InstructionsScene from "./scenes/InstructionsScene"
 
 let game
 
@@ -8,7 +9,7 @@ const config: any = {
   width: 450,
   height: 700,
   type: Phaser.AUTO,
-  scene: [GameScene, GameOverScene],
+  scene: [GameScene, GameOverScene, InstructionsScene],
   backgroundColor: 0x000000,
   physics: {
     default: "matter",
