@@ -3,10 +3,12 @@ export default class Map {
     private scene : Phaser.Scene
     private map : Phaser.Tilemaps.Tilemap;
     private ground : Phaser.Tilemaps.DynamicTilemapLayer
+    private spawnX : number
 
     constructor(scene, level) {
 
         this.scene = scene
+        this.spawnX = 0
 
         this.map = scene.make.tilemap({ key: 'map'});
         const tiles = this.map.addTilesetImage('tiles');
@@ -26,8 +28,12 @@ export default class Map {
     }
 
     respawn() {
-        this.ground.setX(0)
+        this.ground.setX(this.spawnX)
         this.scene.matter.world.convertTilemapLayer(this.ground);
+    }
+
+    savePosition() {
+        this.spawnX = this.ground.x
     }
 
     moveGroundX(offset : number) {

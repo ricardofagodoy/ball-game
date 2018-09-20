@@ -1,5 +1,6 @@
 import "phaser";
 import GameScene from "./scenes/GameScene";
+import GameOverScene from "./scenes/GameOverScene";
 
 let game
 //const width = window.innerWidth * window.devicePixelRatio
@@ -9,7 +10,7 @@ const config: any = {
   width: 450,
   height: 700,
   type: Phaser.AUTO,
-  scene: GameScene,
+  scene: [GameScene, GameOverScene],
   backgroundColor: 0x000000,
   physics: {
     default: "matter",

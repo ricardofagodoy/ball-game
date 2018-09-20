@@ -2,7 +2,6 @@ import GameScene from '../scenes/GameScene'
 
 export default class Ball extends Phaser.Physics.Matter.Sprite {
    
-    private speed = 5
     private bounceSpeed = 5
     private spawnX : number;
     private spawnY : number;
@@ -36,6 +35,10 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
             if (object.tile.properties['ground'])
                 return this.setVelocityY(-this.bounceSpeed)
         }
+    }
+
+    savePosition() {
+        this.spawnY = this.y
     }
 
     respawn() {
