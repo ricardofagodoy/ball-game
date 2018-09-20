@@ -13,7 +13,7 @@ class GameScene extends Phaser.Scene {
 
     private textStyle = {font: "20px Lucida Grande", fill: "#FFF"}
     private levelText : Phaser.GameObjects.Text
-    private level = 1
+    private level
 
     private saveText : Phaser.GameObjects.Text
     private saved = false
@@ -38,6 +38,8 @@ class GameScene extends Phaser.Scene {
         // Main character
         this.load.spritesheet('ball', 'assets/ball.png',
         { frameWidth: 29, frameHeight: 29 })
+
+        this.level = +window.localStorage.getItem('level') || 1
     }
     
     create () {
@@ -127,6 +129,7 @@ class GameScene extends Phaser.Scene {
     nextLevel() {
 
         this.level++
+        window.localStorage.setItem('level', this.level)
         
         this.levelText.setText(this.level + '/' + this.map.getNumberOfLayers())
         this.scene.restart()

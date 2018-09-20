@@ -3,8 +3,6 @@ import GameScene from "./scenes/GameScene";
 import GameOverScene from "./scenes/GameOverScene";
 
 let game
-//const width = window.innerWidth * window.devicePixelRatio
-//const height = window.innerHeight * window.devicePixelRatio
 
 const config: any = {
   width: 450,
