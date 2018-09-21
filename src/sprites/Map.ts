@@ -1,30 +1,28 @@
 export default class Map {
     
     private scene : Phaser.Scene
-    private map : Phaser.Tilemaps.Tilemap;
-    private ground : Phaser.Tilemaps.DynamicTilemapLayer
+    private ground : Phaser.Tilemaps.StaticTilemapLayer
     private spawnX : number
+    private maxLevel : number
 
-    constructor(scene, level) {
+    constructor(scene : Phaser.Scene, level : number) {
 
-        this.scene = scene
         this.spawnX = 0
+        this.scene = scene
 
-        this.map = scene.make.tilemap({ key: 'map'});
-        const tiles = this.map.addTilesetImage('tiles');
-
-        this.ground = this.map.createDynamicLayer("level" + level, tiles, 0, 0);
+        const tilemap = scene.make.tilemap({ key: 'map'});
+        const layer = 'level' + level
+        
+        this.maxLevel = tilemap.layers.length
+        this.ground = tilemap.createStaticLayer(layer, tilemap.addTilesetImage('tiles'), 0, 0)
+        
+        tilemap.setCollisionByProperty({ collides: true });
     
-        this.map.setCollisionByProperty({ collides: true });
         scene.matter.world.convertTilemapLayer(this.ground);
     }
 
-    getHeight() {
-        return this.map.height
-    }
-
-    getNumberOfLayers() {
-        return this.map.layers.length
+    getMaxLevel() {
+        return this.maxLevel
     }
 
     respawn() {
@@ -32,7 +30,7 @@ export default class Map {
         this.scene.matter.world.convertTilemapLayer(this.ground);
     }
 
-    savePosition() {
+    saveCurrentPosition() {
         this.spawnX = this.ground.x
     }
 

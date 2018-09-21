@@ -1,8 +1,8 @@
-import GameScene from '../scenes/GameScene'
+import CollisionHandler from '../components/CollisionHandler'
 
 export default class Ball extends Phaser.Physics.Matter.Sprite {
    
-    private bounceSpeed = 5
+    private bounceHeigth: number
     private spawnX : number;
     private spawnY : number;
 
@@ -12,36 +12,29 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
 
         this.spawnX = x
         this.spawnY = y
+        this.bounceHeigth = this.height / 5.5
 
-        this.scene.add.existing(this)
-        this.setCircle(13, {})
-        this.setScale(1)
+        this.setCircle(this.width / 2.3, {})
     }
 
+    collide(object : Phaser.GameObjects.GameObject) {
+        CollisionHandler.handleBallCollision(this, object)
+    }
+
+    // Keep ball in the center
     update() {
         this.setX(this.spawnX)
     }
 
-    collide(object : Phaser.GameObjects.GameObject) {
-        
-        if (object instanceof Phaser.Physics.Matter.TileBody) {
-
-            if (object.tile.properties['kill'])
-            return (<GameScene>this.scene).killed()
-
-            if (object.tile.properties['finish'])
-                return (<GameScene>this.scene).nextLevel()
-
-            if (object.tile.properties['ground'])
-                return this.setVelocityY(-this.bounceSpeed)
-        }
-    }
-
-    savePosition() {
-        this.spawnY = this.y
+    bounce() {
+        this.setVelocityY(-this.bounceHeigth)
     }
 
     respawn() {
         this.setPosition(this.spawnX, this.spawnY)
+    }
+
+    saveCurrentPosition() {
+        this.spawnY = this.y
     }
 }
