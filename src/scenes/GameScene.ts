@@ -24,8 +24,9 @@ class GameScene extends Phaser.Scene {
     private cursors : CursorKeys
 
     private level : number
-    private pointerMovementSpeed : number
     private groundSpeed = 5
+    private pointerMovementSpeed : number
+    private isRunning : boolean
 
     constructor() {
         super({key: KEY})
@@ -55,10 +56,14 @@ class GameScene extends Phaser.Scene {
         this.load.tilemapTiledJSON('map', 'assets/levels.json');
 
         // Ball
-        this.load.spritesheet('ball', 'assets/ball.png', {frameWidth: 29, frameHeight: 29})
+        this.load.spritesheet('ball', 'assets/ball.png', {frameWidth: 60, frameHeight: 60})
     }
     
     create () {
+
+        // It's alive!
+        this.isRunning = true
+
         // Map
         this.map = new Map(this, this.level)
 
@@ -72,15 +77,18 @@ class GameScene extends Phaser.Scene {
         })
         
         this.ball.on('finish', () => {
-
-            if (++this.level > this.map.getMaxLevel()) {
-                this.level = 1
-                this.scene.switch('GameOverScene')
-            }
-
+            
+            this.level++
             this.storage.put(LEVEL, this.level)
             this.levelText.updateLevel(this.level)
-            this.scene.restart()
+
+            if (this.level > this.map.getMaxLevel()) {
+                this.storage.put(LEVEL, 1)
+                this.isRunning = false
+                this.scene.switch('GameOverScene')
+            } else {
+                this.scene.restart()
+            }
         })
 
         // Level Text
@@ -128,6 +136,9 @@ class GameScene extends Phaser.Scene {
         this.map.moveGroundX(this.pointerMovementSpeed)
         
         this.ball.update()
+
+        if (!this.isRunning)
+            this.scene.stop(KEY)
     }
 }
 

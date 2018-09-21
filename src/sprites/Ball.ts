@@ -2,7 +2,7 @@ import CollisionHandler from '../components/CollisionHandler'
 
 export default class Ball extends Phaser.Physics.Matter.Sprite {
    
-    private bounceHeigth: number
+    private bounceHeigth = 5
     private spawnX : number;
     private spawnY : number;
 
@@ -12,9 +12,9 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
 
         this.spawnX = x
         this.spawnY = y
-        this.bounceHeigth = this.height / 5.5
-
-        this.setCircle(this.width / 2.3, {})
+        
+        this.setCircle(this.width / 2, {})
+        this.setScale(0.5)
     }
 
     collide(object : Phaser.GameObjects.GameObject) {

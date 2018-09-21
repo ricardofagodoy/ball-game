@@ -22,7 +22,7 @@ class GameOverScene extends Phaser.Scene {
             .setOrigin(0.5)
             .setInteractive()
             .on('pointerdown', () => {
-                this.scene.switch('GameScene')
+                this.scene.start('GameScene')
             })
     }
 }
