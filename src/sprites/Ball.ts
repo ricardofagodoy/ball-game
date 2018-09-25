@@ -2,7 +2,7 @@ import CollisionHandler from '../components/CollisionHandler'
 
 export default class Ball extends Phaser.Physics.Matter.Sprite {
    
-    private readonly SCALE = 0.4
+    private readonly SCALE = 0.5
 
     private bounceHeigth = 5
     private spawnX : number;

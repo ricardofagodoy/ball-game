@@ -2,7 +2,7 @@ export default class SaveButton extends Phaser.GameObjects.GameObject {
 
     private saved : boolean
     private saveText : Phaser.GameObjects.Text
-    private textStyle = {font: "20px Lucida Grande", fill: "#FFF"}
+    private textStyle = {font: "25px Lucida Grande", fill: "#FFF"}
 
     constructor(scene : Phaser.Scene, gameWidth : number) {
 
