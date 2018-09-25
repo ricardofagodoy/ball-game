@@ -24,14 +24,20 @@ export default {
     handleBallCollision(ball : Ball, object : Phaser.GameObjects.GameObject) {
         if (object instanceof Phaser.Physics.Matter.TileBody) {
 
-            if (object.tile.properties['kill'])
+            const properties = object.tile.properties
+
+            if (properties['kill'] && !isCollidingBellowTile(ball, object.tile))
                 return ball.emit('died')
 
-            if (object.tile.properties['finish'])
+            if (properties['finish'])
                 return ball.emit('finish')
 
-            if (object.tile.properties['ground'])
+            if (properties['ground'])
                 return ball.bounce()
         }
     }
+}
+
+function isCollidingBellowTile(ball : Ball, tile : Phaser.Tilemaps.Tile) {
+    return ball.y - tile.pixelY > ball.height
 }

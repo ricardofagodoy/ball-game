@@ -4,6 +4,7 @@ import Ball from '../sprites/Ball'
 import Storage from '../components/Storage'
 import LocalStorage from '../components/LocalStorage'
 import CollisionHandler from '../components/CollisionHandler'
+import PointerHandler from '../components/PointerHandler'
 
 import LevelText from '../components/LevelText'
 import SaveButton from '../components/SaveButton'
@@ -26,6 +27,7 @@ class GameScene extends Phaser.Scene {
     private level : number
     private groundSpeed = 5
     private pointerMovementSpeed : number
+
     private isRunning : boolean
 
     constructor() {
@@ -36,6 +38,7 @@ class GameScene extends Phaser.Scene {
         // Define game width and heigth
         this.width = +this.scene.manager.game.config.width
         this.height = +this.scene.manager.game.config.height
+        this.pointerMovementSpeed = 0
 
         this.storage = new LocalStorage()
 
@@ -85,10 +88,10 @@ class GameScene extends Phaser.Scene {
             if (this.level > this.map.getMaxLevel()) {
                 this.storage.put(LEVEL, 1)
                 this.isRunning = false
-                this.scene.switch('GameOverScene')
-            } else {
+                this.scene.stop(KEY)
+                this.scene.start('GameOverScene')
+            } else
                 this.scene.restart()
-            }
         })
 
         // Level Text
@@ -109,25 +112,18 @@ class GameScene extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
 
         // Pointer (touch) movement
-        this.input.on('pointerdown', (pointer : Phaser.Input.Pointer) => {
-            
-            // Text above level
-            if (pointer.y < 50)
-                return
+        this.input.addPointer(1);
 
-            if (pointer.x < this.width / 2)
-                this.pointerMovementSpeed = this.groundSpeed
-            else
-                this.pointerMovementSpeed = -this.groundSpeed
-        })
-
-        this.input.on('pointerup', (pointer : Phaser.Input.Pointer) => {
-            this.pointerMovementSpeed = 0
-        })
+        this.input.on('pointerdown', PointerHandler.handlePointerDown.bind(this))
+        this.input.on('pointerup', PointerHandler.handlePointerUp.bind(this))
     }
 
     update () {
     
+        if (!this.isRunning) {
+            return;
+        }
+
         if (this.cursors.left.isDown)
             this.map.moveGroundX(-this.groundSpeed)
         else if (this.cursors.right.isDown)
@@ -136,9 +132,6 @@ class GameScene extends Phaser.Scene {
         this.map.moveGroundX(this.pointerMovementSpeed)
         
         this.ball.update()
-
-        if (!this.isRunning)
-            this.scene.stop(KEY)
     }
 }
 

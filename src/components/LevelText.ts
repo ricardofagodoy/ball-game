@@ -5,12 +5,19 @@ export default class LevelText {
     private maxLevel : number
 
     constructor(scene : Phaser.Scene, currentLevel : number, maxLevel : number) {
-        scene.add.text(15, 15, 'Level ', this.textStyle)
-        this.levelText = scene.add.text(70, 15, '', this.textStyle)
         
+        scene.add.text(15, 15, 'Level ', this.textStyle)
+        
+        this.levelText = scene.add.text(70, 15, '', this.textStyle)
         this.maxLevel = maxLevel
 
         this.updateLevel(currentLevel)
+
+        // REMOVE ME!!!
+        this.levelText.setInteractive().on('pointerdown', () => {
+            window.localStorage.setItem('level', '1')
+            scene.scene.restart()
+        })
     }
 
     updateLevel(level : number) {

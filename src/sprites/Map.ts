@@ -16,7 +16,7 @@ export default class Map {
         this.maxLevel = tilemap.layers.length
         this.ground = tilemap.createStaticLayer(layer, tilemap.addTilesetImage('tiles'), 0, 0)
         
-        tilemap.setCollisionByProperty({ collides: true });
+        this.ground.setCollisionByProperty({ collides: true });
     
         scene.matter.world.convertTilemapLayer(this.ground);
     }
