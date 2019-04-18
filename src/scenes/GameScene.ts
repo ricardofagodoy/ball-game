@@ -112,10 +112,10 @@ class GameScene extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
 
         // Pointer (touch) movement
-        this.input.addPointer(1);
+        //this.input.addPointer(1);
 
-        this.input.on('pointerdown', PointerHandler.handlePointerDown.bind(this))
-        this.input.on('pointerup', PointerHandler.handlePointerUp.bind(this))
+        //this.input.on('pointerdown', PointerHandler.handlePointerDown.bind(this))
+        //this.input.on('pointerup', PointerHandler.handlePointerUp.bind(this))
     }
 
     update () {
