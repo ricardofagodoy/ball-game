@@ -3,7 +3,6 @@ export default class Map {
     private scene : Phaser.Scene
     private ground : Phaser.Tilemaps.StaticTilemapLayer
     private spawnX : number
-    private maxLevel : number
 
     constructor(scene : Phaser.Scene, level : number) {
 
@@ -13,16 +12,11 @@ export default class Map {
         const tilemap = scene.make.tilemap({ key: 'map'});
         const layer = 'level' + level
         
-        this.maxLevel = tilemap.layers.length
         this.ground = tilemap.createStaticLayer(layer, tilemap.addTilesetImage('tiles'), 0, 0)
         
         this.ground.setCollisionByProperty({ collides: true });
     
         scene.matter.world.convertTilemapLayer(this.ground);
-    }
-
-    getMaxLevel() {
-        return this.maxLevel
     }
 
     respawn() {

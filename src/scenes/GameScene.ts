@@ -8,9 +8,9 @@ import PointerHandler from '../components/PointerHandler'
 
 import LevelText from '../components/LevelText'
 import SaveButton from '../components/SaveButton'
+import BackButton from '../components/BackButton'
 
 const KEY = 'GameScene'
-const LEVEL = 'level'
 
 class GameScene extends Phaser.Scene {
 
@@ -22,9 +22,11 @@ class GameScene extends Phaser.Scene {
     private ball : Ball
     private levelText : LevelText
     private saveButton : SaveButton
+    private backButton : BackButton
     private cursors : CursorKeys
 
     private level : number
+    private maxLevel : number
     private groundSpeed = 5
     private pointerMovementSpeed : number
 
@@ -34,23 +36,17 @@ class GameScene extends Phaser.Scene {
         super({key: KEY})
     }
 
-    init() {
+    init(data) {
+
         // Define game width and heigth
         this.width = +this.scene.manager.game.config.width
         this.height = +this.scene.manager.game.config.height
         this.pointerMovementSpeed = 0
 
+        this.level = data.level
+        this.maxLevel = data.maxLevel
+
         this.storage = new LocalStorage()
-
-        // Retrieve current level
-        this.level = +this.storage.get(LEVEL)
-
-        // First time playing
-        if (!this.level) {
-            this.level = 1
-            this.storage.put(LEVEL, 1)
-            this.scene.switch('InstructionsScene')
-        }
     }
 
     preload () {
@@ -82,20 +78,28 @@ class GameScene extends Phaser.Scene {
         this.ball.on('finish', () => {
             
             this.level++
-            this.storage.put(LEVEL, this.level)
-            this.levelText.updateLevel(this.level)
 
-            if (this.level > this.map.getMaxLevel()) {
-                this.storage.put(LEVEL, 1)
+            // Just playing level again
+            if (this.level <= this.storage.getLevel()) {
                 this.isRunning = false
                 this.scene.stop(KEY)
-                this.scene.start('GameOverScene')
+                this.scene.start('HomeScene')
+                return
+            }
+
+            this.storage.setLevel(this.level)
+            this.levelText.updateLevel(this.level)
+
+            if (this.level > this.maxLevel) {
+                this.isRunning = false
+                this.scene.stop(KEY)
+                this.scene.start('HomeScene')
             } else
-                this.scene.restart()
+                this.scene.restart({level: this.level, maxLevel: this.maxLevel})
         })
 
         // Level Text
-        this.levelText = new LevelText(this, this.level, this.map.getMaxLevel())
+        this.levelText = new LevelText(this, this.level, this.maxLevel, this.width)
 
         // Save Button
         this.saveButton = new SaveButton(this, this.width)
@@ -104,7 +108,16 @@ class GameScene extends Phaser.Scene {
             this.ball.saveCurrentPosition()
             this.map.saveCurrentPosition()
         })
-                
+
+        // Back Button
+        this.backButton = new BackButton(this, this.width)
+
+        this.backButton.on('click', () => {
+            this.isRunning = false
+            this.scene.stop(KEY)
+            this.scene.start('HomeScene')
+        })
+
         // Collision being handled
         this.matter.world.on("collisionstart", CollisionHandler.checkCollisions)
         
@@ -112,10 +125,10 @@ class GameScene extends Phaser.Scene {
         this.cursors = this.input.keyboard.createCursorKeys();
 
         // Pointer (touch) movement
-        //this.input.addPointer(1);
+        this.input.addPointer(1);
 
-        //this.input.on('pointerdown', PointerHandler.handlePointerDown.bind(this))
-        //this.input.on('pointerup', PointerHandler.handlePointerUp.bind(this))
+        this.input.on('pointerdown', PointerHandler.handlePointerDown.bind(this))
+        this.input.on('pointerup', PointerHandler.handlePointerUp.bind(this))
     }
 
     update () {

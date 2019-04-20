@@ -4,20 +4,14 @@ export default class LevelText {
     private textStyle = {font: "25px Lucida Grande", fill: "#FFF"}
     private maxLevel : number
 
-    constructor(scene : Phaser.Scene, currentLevel : number, maxLevel : number) {
+    constructor(scene : Phaser.Scene, currentLevel : number, maxLevel : number, screenWidth : number) {
         
-        scene.add.text(15, 15, 'Level ', this.textStyle)
-        
-        this.levelText = scene.add.text(80, 15, '', this.textStyle)
+        this.levelText = scene.add.text(screenWidth / 2, 30, '', this.textStyle)
+        this.levelText.setOrigin(0.5)
+
         this.maxLevel = maxLevel
 
         this.updateLevel(currentLevel)
-
-        // REMOVE ME!!!
-        this.levelText.setInteractive().on('pointerdown', () => {
-            window.localStorage.setItem('level', '1')
-            scene.scene.restart()
-        })
     }
 
     updateLevel(level : number) {
