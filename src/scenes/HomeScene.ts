@@ -6,9 +6,9 @@ import LocalStorage from '../components/LocalStorage'
 class HomeScene extends Phaser.Scene {
 
     private textStyle = { font: "25px Lucida Grande", fill: "#FFF" }
+    private MAX_LEVEL : number = 7
 
     private level : number
-    private MAX_LEVEL : number = 7
     private storage : Storage
 
     constructor() {
@@ -47,7 +47,7 @@ class HomeScene extends Phaser.Scene {
         const graphics = this.add.graphics()
 
         // Levels table
-        graphics.lineStyle(4, 0xffffff, 1);
+        graphics.lineStyle(2, 0xffffff, 1);
     
         const globalYPadding = 50
         const padding = 20
@@ -59,6 +59,7 @@ class HomeScene extends Phaser.Scene {
     
             const x = (padding + boxWidth) *((level-1)%levelsPerRow) + padding
             const y = (padding + boxWidth) * (Math.trunc((level-1)/levelsPerRow)) + padding + globalYPadding
+            
             graphics.strokeRect(x, y, boxWidth, boxWidth)
 
             // Fill on current level and already played
@@ -72,14 +73,21 @@ class HomeScene extends Phaser.Scene {
                 graphics.fillRect(x, y, boxWidth, boxWidth)
             }
 
+            // Time record
+            this.add.text(x + boxWidth/2, y + boxWidth/2, 'Best: 12s' , { font: "14px Lucida Grande", fill: "#FFF" })
+                .setOrigin(0.5)
+
+            this.add.text(x + boxWidth/2, y + boxWidth/1.4, 'Pro: 9s' , { font: "14px Lucida Grande", fill: "#FFF" })
+                .setOrigin(0.5)
+
             // Draw level numbers and handle clicks
-            const levelText = this.add.text(x + boxWidth/2, y + boxWidth/4, level.toString() , this.textStyle)
-            .setOrigin(0.5)
-            
-            levelText.setInteractive()
+            this.add.text(x + boxWidth/2, y + boxWidth/4, level.toString() , this.textStyle)
+                .setOrigin(0.5)
+
+            this.add.zone(x, y, boxWidth, boxWidth).setInteractive()
                 .on('pointerdown', () => {
-                    this.scene.stop(KEY)
-                    this.scene.start('GameScene', {level: level, maxLevel: this.MAX_LEVEL})
+                  this.scene.stop(KEY)
+                 this.scene.start('GameScene', {level: level, maxLevel: this.MAX_LEVEL})
                 })
         }
     }
