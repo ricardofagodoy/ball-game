@@ -66,8 +66,12 @@ class GameScene extends Phaser.Scene {
         // Map
         this.map = new Map(this, this.level)
 
+        // Adjust gravity and time for record
+        if (this.map.getMapGravity())
+            this.scene.scene.matter.world.setGravity(0, this.map.getMapGravity())
+
         // Ball
-        this.ball = new Ball(this, this.width/2, 30)
+        this.ball = new Ball(this, this.width/2, 30, this.map.getMapBounce())
         this.add.existing(this.ball)
 
         this.ball.on('died', () => {

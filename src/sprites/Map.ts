@@ -2,6 +2,7 @@ export default class Map {
     
     private scene : Phaser.Scene
     private ground : Phaser.Tilemaps.StaticTilemapLayer
+    private dataLayer : Phaser.Tilemaps.LayerData
     private spawnX : number
 
     constructor(scene : Phaser.Scene, level : number) {
@@ -13,10 +14,10 @@ export default class Map {
         const layer = 'level' + level
         
         this.ground = tilemap.createStaticLayer(layer, tilemap.addTilesetImage('tiles'), 0, 0)
-        
         this.ground.setCollisionByProperty({ collides: true });
-    
         scene.matter.world.convertTilemapLayer(this.ground);
+        
+        this.dataLayer = tilemap.getLayer(this.ground)
     }
 
     respawn() {
@@ -36,5 +37,17 @@ export default class Map {
             this.ground.setX(this.ground.x + offset)
             this.scene.matter.world.convertTilemapLayer(this.ground)
         }
+    }
+
+    getMapGravity() : number {
+        return +this.dataLayer.properties['gravity']
+    }
+
+    getMapBounce() : number {
+        return +this.dataLayer.properties['bounce']
+    }
+
+    getMapTime() : number {
+        return +this.dataLayer.properties['time']
     }
 }
