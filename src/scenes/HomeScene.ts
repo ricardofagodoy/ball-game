@@ -65,14 +65,10 @@ class HomeScene extends Phaser.Scene {
             // Fill on current level and already played
             graphics.fillStyle(0x58A910, 0.5);
 
-            if (level <= this.level) {
-
-                if (level == this.level)
-                    graphics.fillStyle(0x64ACF0, 0.5);
-
-                graphics.fillRect(x, y, boxWidth, boxWidth)
-            }
-
+            // Draw level numbers
+            this.add.text(x + boxWidth/2, y + boxWidth/4, level.toString() , this.textStyle)
+                .setOrigin(0.5)
+                
             // Time record
             this.add.text(x + boxWidth/2, y + boxWidth/2, 'Best: 12s' , { font: "14px Lucida Grande", fill: "#FFF" })
                 .setOrigin(0.5)
@@ -80,15 +76,20 @@ class HomeScene extends Phaser.Scene {
             this.add.text(x + boxWidth/2, y + boxWidth/1.4, 'Pro: 9s' , { font: "14px Lucida Grande", fill: "#FFF" })
                 .setOrigin(0.5)
 
-            // Draw level numbers and handle clicks
-            this.add.text(x + boxWidth/2, y + boxWidth/4, level.toString() , this.textStyle)
-                .setOrigin(0.5)
+            if (level <= this.level) {
 
-            this.add.zone(x, y, boxWidth, boxWidth).setInteractive()
-                .on('pointerdown', () => {
-                  this.scene.stop(KEY)
-                 this.scene.start('GameScene', {level: level, maxLevel: this.MAX_LEVEL})
-                })
+                if (level == this.level)
+                    graphics.fillStyle(0x64ACF0, 0.5);
+
+                graphics.fillRect(x, y, boxWidth, boxWidth)
+
+                // You can also click them to play
+                this.add.zone(x, y, boxWidth, boxWidth).setInteractive()
+                    .on('pointerdown', () => {
+                        this.scene.stop(KEY)
+                        this.scene.start('GameScene', {level: level, maxLevel: this.MAX_LEVEL})
+                     })
+            }
         }
     }
 }

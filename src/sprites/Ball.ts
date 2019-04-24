@@ -7,6 +7,7 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
     private bounceHeigth = 5
     private spawnX : number;
     private spawnY : number;
+    private isDead : boolean = false
 
     constructor(scene : Phaser.Scene, x : number, y : number, bounce? : number) {
 
@@ -33,14 +34,26 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
     }
 
     bounce() {
-        this.setVelocityY(-this.bounceHeigth)
+        if (!this.isDead)
+            this.setVelocityY(-this.bounceHeigth)
     }
 
     respawn() {
+        this.isDead = false
+        this.setIgnoreGravity(false)
+        this.setTint(0xffffff)
         this.setPosition(this.spawnX, this.spawnY)
     }
 
     saveCurrentPosition() {
         this.spawnY = this.y
+    }
+
+    died() {
+        this.setTint(0xff0000)
+        this.isDead = true
+        this.setVelocity(0, 0)
+        this.setAngularVelocity(0)
+        this.setIgnoreGravity(true)
     }
 }

@@ -75,8 +75,18 @@ class GameScene extends Phaser.Scene {
         this.add.existing(this.ball)
 
         this.ball.on('died', () => {
-            this.map.respawn()
-            this.ball.respawn()
+
+            if (this.isRunning) {
+
+                this.isRunning = false
+                this.ball.died()    
+
+                setTimeout(() => {
+                    this.map.respawn()
+                    this.ball.respawn()
+                    this.isRunning = true
+                }, 1000)
+            }
         })
         
         this.ball.on('finish', () => {
