@@ -3,4 +3,6 @@ export default interface Storage {
     get(key : string) : string
     getLevel() : number
     setLevel(level : number) : void
+    setTime(level : number, time : number) : void
+    getTime(level : number) : number
 }

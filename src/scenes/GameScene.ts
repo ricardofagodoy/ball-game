@@ -3,6 +3,7 @@ import Ball from '../sprites/Ball'
 
 import Storage from '../components/Storage'
 import LocalStorage from '../components/LocalStorage'
+import Stopwatch from '../components/Stopwatch'
 import CollisionHandler from '../components/CollisionHandler'
 import PointerHandler from '../components/PointerHandler'
 
@@ -18,12 +19,14 @@ class GameScene extends Phaser.Scene {
     private height
 
     private storage : Storage
+    private stopwatch : Stopwatch
     private map : Map
     private ball : Ball
     private levelText : LevelText
     private saveButton : SaveButton
     private backButton : BackButton
     private cursors : CursorKeys
+    private startTime : number
 
     private level : number
     private maxLevel : number
@@ -47,6 +50,7 @@ class GameScene extends Phaser.Scene {
         this.maxLevel = data.maxLevel
 
         this.storage = new LocalStorage()
+        this.stopwatch = new Stopwatch()
     }
 
     preload () {
@@ -84,12 +88,16 @@ class GameScene extends Phaser.Scene {
                 setTimeout(() => {
                     this.map.respawn()
                     this.ball.respawn()
+                    this.stopwatch.startTimer()
                     this.isRunning = true
                 }, 1000)
             }
         })
         
         this.ball.on('finish', () => {
+            
+            // Store possible best time
+            this.storage.setTime(this.level, this.stopwatch.stopTimerInSeconds())
             
             this.level++
 
@@ -121,6 +129,7 @@ class GameScene extends Phaser.Scene {
         this.saveButton.on('saved', () => {
             this.ball.saveCurrentPosition()
             this.map.saveCurrentPosition()
+            this.stopwatch.storeLap()
         })
 
         // Back Button
@@ -143,6 +152,9 @@ class GameScene extends Phaser.Scene {
 
         this.input.on('pointerdown', PointerHandler.handlePointerDown.bind(this))
         this.input.on('pointerup', PointerHandler.handlePointerUp.bind(this))
+
+        // Saves start time of the level
+        this.stopwatch.startTimer()
     }
 
     update () {

@@ -70,10 +70,12 @@ class HomeScene extends Phaser.Scene {
                 .setOrigin(0.5)
                 
             // Time record
-            this.add.text(x + boxWidth/2, y + boxWidth/2, 'Best: 12s' , { font: "14px Lucida Grande", fill: "#FFF" })
+            const best = this.storage.getTime(level)
+
+            this.add.text(x + boxWidth/2, y + boxWidth/2, 'Best: ' + (best ? best + 's' : '--') , { font: "14px Lucida Grande", fill: "#FFF" })
                 .setOrigin(0.5)
 
-            this.add.text(x + boxWidth/2, y + boxWidth/1.4, 'Pro: 9s' , { font: "14px Lucida Grande", fill: "#FFF" })
+            this.add.text(x + boxWidth/2, y + boxWidth/1.4, 'Pro: --' , { font: "14px Lucida Grande", fill: "#FFF" })
                 .setOrigin(0.5)
 
             if (level <= this.level) {
