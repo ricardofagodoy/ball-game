@@ -1,13 +1,23 @@
 const KEY = 'HomeScene'
+let hasShownWinnerScreen = false
 
 import Storage from '../components/Storage'
 import LocalStorage from '../components/LocalStorage'
 
 class HomeScene extends Phaser.Scene {
 
-    private textStyle = { font: "25px Lucida Grande", fill: "#FFF" }
-    private MAX_LEVEL : number = 7
+    private LEVEL_TIME = {
+        1: 3.0,
+        2: 7.0,
+        3: 11.0,
+        4: 11.0,
+        5: 11.0,
+        6: 11.0,
+        7: 20.0
+    }
 
+    private MAX_LEVEL : number = Object.keys(this.LEVEL_TIME).length
+    private textStyle = { font: "25px Lucida Grande", fill: "#FFF" }
     private level : number
     private storage : Storage
 
@@ -32,7 +42,6 @@ class HomeScene extends Phaser.Scene {
     preload () {
 
         const width = +this.scene.manager.game.config.width
-        const height = +this.scene.manager.game.config.height
 
         // Instructions button
         this.add.text(width - 85, 30, 'Instructions', this.textStyle)
@@ -54,6 +63,8 @@ class HomeScene extends Phaser.Scene {
         const levelsPerRow = 3
         const boxWidth = (width - padding*(levelsPerRow+1)) / levelsPerRow
     
+        let levelsGotPro = 0
+
         // Draw grid
         for (let level = 1; level <= this.MAX_LEVEL; level++) {
     
@@ -71,17 +82,24 @@ class HomeScene extends Phaser.Scene {
                 
             // Time record
             const best = this.storage.getTime(level)
+            const levelTime = this.LEVEL_TIME[level]
 
             this.add.text(x + boxWidth/2, y + boxWidth/2, 'Best: ' + (best ? best + 's' : '--') , { font: "14px Lucida Grande", fill: "#FFF" })
                 .setOrigin(0.5)
 
-            this.add.text(x + boxWidth/2, y + boxWidth/1.4, 'Pro: --' , { font: "14px Lucida Grande", fill: "#FFF" })
+            this.add.text(x + boxWidth/2, y + boxWidth/1.4, 'Pro: ' + (levelTime ? levelTime + 's' : '--') , { font: "14px Lucida Grande", fill: "#FFF" })
                 .setOrigin(0.5)
 
             if (level <= this.level) {
 
                 if (level == this.level)
                     graphics.fillStyle(0x64ACF0, 0.5);
+
+                // If user has Pro'ed a level
+                if (best <= levelTime) {
+                    graphics.fillStyle(0xDAD400, 0.5)
+                    levelsGotPro++
+                }
 
                 graphics.fillRect(x, y, boxWidth, boxWidth)
 
@@ -92,6 +110,12 @@ class HomeScene extends Phaser.Scene {
                         this.scene.start('GameScene', {level: level, maxLevel: this.MAX_LEVEL})
                      })
             }
+        }
+
+        // When player pro all levels, it's over :)
+        if (levelsGotPro == this.MAX_LEVEL && !hasShownWinnerScreen) {
+            hasShownWinnerScreen = true
+            this.scene.start('WinnerScene')
         }
     }
 }
