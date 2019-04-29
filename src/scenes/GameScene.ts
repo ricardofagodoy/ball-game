@@ -6,6 +6,7 @@ import LocalStorage from '../components/LocalStorage'
 import Stopwatch from '../components/Stopwatch'
 import CollisionHandler from '../components/CollisionHandler'
 import PointerHandler from '../components/PointerHandler'
+import Cameras from '../components/Cameras'
 
 import LevelText from '../components/LevelText'
 import SaveButton from '../components/SaveButton'
@@ -26,7 +27,7 @@ class GameScene extends Phaser.Scene {
     private saveButton : SaveButton
     private backButton : BackButton
     private cursors : CursorKeys
-    private startTime : number
+    private camera : Cameras
 
     private level : number
     private maxLevel : number
@@ -44,6 +45,7 @@ class GameScene extends Phaser.Scene {
         // Define game width and heigth
         this.width = +this.scene.manager.game.config.width
         this.height = +this.scene.manager.game.config.height
+
         this.pointerMovementSpeed = 0
 
         this.level = data.level
@@ -75,7 +77,7 @@ class GameScene extends Phaser.Scene {
             this.scene.scene.matter.world.setGravity(0, this.map.getMapGravity())
 
         // Ball
-        this.ball = new Ball(this, this.width/2, 30, this.map.getMapBounce())
+        this.ball = new Ball(this, this.width/2, 0, this.map.getMapBounce())
         this.add.existing(this.ball)
 
         this.ball.on('died', () => {
@@ -88,6 +90,7 @@ class GameScene extends Phaser.Scene {
                 setTimeout(() => {
                     this.map.respawn()
                     this.ball.respawn()
+                    this.camera.spawnMainCamera(this.ball.getPosition())
                     this.stopwatch.startTimer()
                     this.isRunning = true
                 }, 1000)
@@ -153,15 +156,17 @@ class GameScene extends Phaser.Scene {
         this.input.on('pointerdown', PointerHandler.handlePointerDown.bind(this))
         this.input.on('pointerup', PointerHandler.handlePointerUp.bind(this))
 
+        // Camera settings
+        this.camera = new Cameras(this, this.width, this.height)
+
         // Saves start time of the level
         this.stopwatch.startTimer()
     }
 
     update () {
     
-        if (!this.isRunning) {
+        if (!this.isRunning)
             return;
-        }
 
         if (this.cursors.left.isDown)
             this.map.moveGroundX(-this.groundSpeed)
@@ -171,6 +176,8 @@ class GameScene extends Phaser.Scene {
         this.map.moveGroundX(this.pointerMovementSpeed)
         
         this.ball.update()
+
+        this.camera.update(this.ball.getPosition())
     }
 }
 

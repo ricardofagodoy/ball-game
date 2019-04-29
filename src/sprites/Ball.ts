@@ -7,6 +7,7 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
     private bounceHeigth = 5
     private spawnX : number;
     private spawnY : number;
+    private absoluteY : number;
     private isDead : boolean = false
 
     constructor(scene : Phaser.Scene, x : number, y : number, bounce? : number) {
@@ -15,6 +16,7 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
 
         this.spawnX = x
         this.spawnY = y
+        this.absoluteY = y
 
         if (bounce)
             this.bounceHeigth = bounce
@@ -28,12 +30,19 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
         CollisionHandler.handleBallCollision(this, object)
     }
 
+    getPosition() {
+        return this.absoluteY
+    }
+
     // Keep ball in the center
     update() {
         this.setX(this.spawnX)
     }
 
     bounce() {
+
+        this.absoluteY = Math.max(this.absoluteY, this.y)
+
         if (!this.isDead)
             this.setVelocityY(-this.bounceHeigth)
     }
@@ -43,6 +52,7 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
         this.setIgnoreGravity(false)
         this.setTint(0xffffff)
         this.setPosition(this.spawnX, this.spawnY)
+        this.absoluteY = this.y
     }
 
     saveCurrentPosition() {
