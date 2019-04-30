@@ -3,6 +3,8 @@ export default class Map {
     private scene : Phaser.Scene
     private ground : Phaser.Tilemaps.StaticTilemapLayer
     private dataLayer : Phaser.Tilemaps.LayerData
+
+    private readonly groundSpeed = 5
     private spawnX : number
 
     constructor(scene : Phaser.Scene, level : number) {
@@ -29,7 +31,15 @@ export default class Map {
         this.spawnX = this.ground.x
     }
 
-    moveGroundX(offset : number) {
+    update(direction : number) {
+        this.moveGroundX(direction * this.groundSpeed)
+    }
+
+    getMapBounce() : number {
+        return +this.dataLayer.properties['bounce']
+    }
+
+    private moveGroundX(offset : number) {
 
         const newX = this.ground.x + offset
 
@@ -37,17 +47,5 @@ export default class Map {
             this.ground.setX(this.ground.x + offset)
             this.scene.matter.world.convertTilemapLayer(this.ground)
         }
-    }
-
-    getMapGravity() : number {
-        return +this.dataLayer.properties['gravity']
-    }
-
-    getMapBounce() : number {
-        return +this.dataLayer.properties['bounce']
-    }
-
-    getMapTime() : number {
-        return +this.dataLayer.properties['time']
     }
 }

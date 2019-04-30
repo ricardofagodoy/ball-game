@@ -18,7 +18,7 @@ class HomeScene extends Phaser.Scene {
 
     private MAX_LEVEL : number = Object.keys(this.LEVEL_TIME).length
     private textStyle = { font: "25px Lucida Grande", fill: "#FFF" }
-    private level : number
+    private currentLevel : number
     private storage : Storage
 
     constructor() {
@@ -30,12 +30,12 @@ class HomeScene extends Phaser.Scene {
         this.storage = new LocalStorage()
 
         // Retrieve current level
-        this.level = this.storage.getLevel()
+        this.currentLevel = this.storage.getLevel()
 
         // First time lauching
-        if (!this.level) {
-            this.level = 1
-            this.storage.setLevel(this.level)
+        if (!this.currentLevel) {
+            this.currentLevel = 1
+            this.storage.setLevel(this.currentLevel)
         }
     }
 
@@ -90,9 +90,9 @@ class HomeScene extends Phaser.Scene {
             this.add.text(x + boxWidth/2, y + boxWidth/1.4, 'Pro: ' + (levelTime ? levelTime + 's' : '--') , { font: "14px Lucida Grande", fill: "#FFF" })
                 .setOrigin(0.5)
 
-            if (level <= this.level) {
+            if (level <= this.currentLevel) {
 
-                if (level == this.level)
+                if (level == this.currentLevel)
                     graphics.fillStyle(0x64ACF0, 0.5);
 
                 // If user has Pro'ed a level

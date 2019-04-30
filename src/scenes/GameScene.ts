@@ -3,11 +3,14 @@ import Ball from '../sprites/Ball'
 
 import Storage from '../components/Storage'
 import LocalStorage from '../components/LocalStorage'
+
+import Control from '../components/Control'
+import KeyboardControl from '../components/KeyboardControl'
+import PointerControl from '../components/PointerControl'
+
 import Stopwatch from '../components/Stopwatch'
 import CollisionHandler from '../components/CollisionHandler'
-import PointerHandler from '../components/PointerHandler'
 import Cameras from '../components/Cameras'
-
 import LevelText from '../components/LevelText'
 import SaveButton from '../components/SaveButton'
 import BackButton from '../components/BackButton'
@@ -19,22 +22,20 @@ class GameScene extends Phaser.Scene {
     private width
     private height
 
-    private storage : Storage
-    private stopwatch : Stopwatch
-    private map : Map
-    private ball : Ball
-    private levelText : LevelText
-    private saveButton : SaveButton
-    private backButton : BackButton
-    private cursors : CursorKeys
-    private camera : Cameras
-
+    // Control variables
     private level : number
     private maxLevel : number
-    private groundSpeed = 5
-    private pointerMovementSpeed : number
-
     private isRunning : boolean
+
+    // Components
+    private storage : Storage
+    private stopwatch : Stopwatch
+    private control : Control
+    private camera : Cameras
+
+    // Sprites
+    private map : Map
+    private ball : Ball
 
     constructor() {
         super({key: KEY})
@@ -46,16 +47,22 @@ class GameScene extends Phaser.Scene {
         this.width = +this.scene.manager.game.config.width
         this.height = +this.scene.manager.game.config.height
 
-        this.pointerMovementSpeed = 0
-
+        // Data received via parameter
         this.level = data.level
         this.maxLevel = data.maxLevel
 
         this.storage = new LocalStorage()
         this.stopwatch = new Stopwatch()
+
+        // Touch controls if possible, else keyboards arrows
+        if (this.sys.game.device.input.touch)
+            this.control = new PointerControl(this)
+        else
+            this.control = new KeyboardControl(this)
     }
 
     preload () {
+
         // Map and tiles
         this.load.image('tiles', 'assets/tiles.png');
         this.load.tilemapTiledJSON('map', 'assets/levels.json');
@@ -72,90 +79,26 @@ class GameScene extends Phaser.Scene {
         // Map
         this.map = new Map(this, this.level)
 
-        // Adjust gravity and time for record
-        if (this.map.getMapGravity())
-            this.scene.scene.matter.world.setGravity(0, this.map.getMapGravity())
-
         // Ball
         this.ball = new Ball(this, this.width/2, 0, this.map.getMapBounce())
         this.add.existing(this.ball)
 
-        this.ball.on('died', () => {
+        // Ball events handling
+        this.ball.on('died', () => this.onBallDied())
+        this.ball.on('finish', () => this.onBallFinished())
 
-            if (this.isRunning) {
-
-                this.isRunning = false
-                this.ball.died()    
-
-                setTimeout(() => {
-                    this.map.respawn()
-                    this.ball.respawn()
-                    this.camera.spawnMainCamera(this.ball.getPosition())
-                    this.stopwatch.startTimer()
-                    this.isRunning = true
-                }, 1000)
-            }
-        })
-        
-        this.ball.on('finish', () => {
-            
-            // Store possible best time
-            this.storage.setTime(this.level, this.stopwatch.stopTimerInSeconds())
-            
-            this.level++
-
-            // Just playing level again
-            if (this.level <= this.storage.getLevel()) {
-                this.isRunning = false
-                this.scene.stop(KEY)
-                this.scene.start('HomeScene')
-                return
-            }
-
-            this.storage.setLevel(this.level)
-            this.levelText.updateLevel(this.level)
-
-            if (this.level > this.maxLevel) {
-                this.isRunning = false
-                this.scene.stop(KEY)
-                this.scene.start('HomeScene')
-            } else
-                this.scene.restart({level: this.level, maxLevel: this.maxLevel})
-        })
-
-        // Level Text
-        this.levelText = new LevelText(this, this.level, this.maxLevel, this.width)
+        // Level Text Label
+        new LevelText(this, this.level, this.maxLevel, this.width)
 
         // Save Button
-        this.saveButton = new SaveButton(this, this.width)
-
-        this.saveButton.on('saved', () => {
-            this.ball.saveCurrentPosition()
-            this.map.saveCurrentPosition()
-            this.stopwatch.storeLap()
-        })
+        new SaveButton(this, this.width).on('saved', () => this.onSaveButtonPress())
 
         // Back Button
-        this.backButton = new BackButton(this, this.width)
-
-        this.backButton.on('click', () => {
-            this.isRunning = false
-            this.scene.stop(KEY)
-            this.scene.start('HomeScene')
-        })
+        new BackButton(this, this.width).on('click', () => this.goToHomeScene())
 
         // Collision being handled
         this.matter.world.on("collisionstart", CollisionHandler.checkCollisions)
         
-        // Basic controls (arrows)
-        this.cursors = this.input.keyboard.createCursorKeys();
-
-        // Pointer (touch) movement
-        this.input.addPointer(1);
-
-        this.input.on('pointerdown', PointerHandler.handlePointerDown.bind(this))
-        this.input.on('pointerup', PointerHandler.handlePointerUp.bind(this))
-
         // Camera settings
         this.camera = new Cameras(this, this.width, this.height)
 
@@ -166,18 +109,62 @@ class GameScene extends Phaser.Scene {
     update () {
     
         if (!this.isRunning)
-            return;
+            return
 
-        if (this.cursors.left.isDown)
-            this.map.moveGroundX(-this.groundSpeed)
-        else if (this.cursors.right.isDown)
-            this.map.moveGroundX(this.groundSpeed)
-
-        this.map.moveGroundX(this.pointerMovementSpeed)
-        
+        // Update all sprites
         this.ball.update()
-
+        this.map.update(this.control.update())
         this.camera.update(this.ball.getPosition())
+    }
+
+    private goToHomeScene() {
+        this.isRunning = false
+        this.scene.stop(KEY)
+        this.scene.start('HomeScene')
+    }
+
+    private onSaveButtonPress() {
+        this.ball.saveCurrentPosition()
+        this.map.saveCurrentPosition()
+        this.stopwatch.storeLap()
+    }
+
+    private onBallDied() {
+
+        if (this.isRunning) {
+
+            this.isRunning = false
+
+            // Respawns level after 1 second
+            setTimeout(() => {
+                this.map.respawn()
+                this.ball.respawn()
+                this.camera.spawnMainCamera(this.ball.getPosition())
+                this.stopwatch.startTimer()
+                this.isRunning = true
+            }, 1000)
+        }
+    }
+
+    private onBallFinished() {
+
+        // Store possible best time
+        this.storage.setTime(this.level, this.stopwatch.stopTimerInSeconds())
+            
+        this.level++
+
+        // Just playing level again, go back to level select
+        if (this.level <= this.storage.getLevel())
+            return this.goToHomeScene()
+
+        // Save new level record
+        this.storage.setLevel(this.level)
+
+        // There is no next level!
+        if (this.level > this.maxLevel)
+            this.goToHomeScene()
+        else
+            this.scene.restart({level: this.level, maxLevel: this.maxLevel})
     }
 }
 
