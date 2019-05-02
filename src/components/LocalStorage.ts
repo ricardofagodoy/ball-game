@@ -1,7 +1,8 @@
 import Storage from './Storage'
+import Settings from '../settings'
 
-const LEVEL = 'level'
-const TIME = 'time'
+const LEVEL = Settings.storage.level
+const TIME = Settings.storage.time
 
 export default class LocalStorage implements Storage {
 

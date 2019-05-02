@@ -1,10 +1,11 @@
+import Settings from '../settings'
+
 export default class Map {
     
     private scene : Phaser.Scene
     private ground : Phaser.Tilemaps.StaticTilemapLayer
     private dataLayer : Phaser.Tilemaps.LayerData
 
-    private readonly groundSpeed = 5
     private spawnX : number
 
     constructor(scene : Phaser.Scene, level : number) {
@@ -32,7 +33,7 @@ export default class Map {
     }
 
     update(direction : number) {
-        this.moveGroundX(direction * this.groundSpeed)
+        this.moveGroundX(direction * Settings.groundSpeed)
     }
 
     getMapBounce() : number {

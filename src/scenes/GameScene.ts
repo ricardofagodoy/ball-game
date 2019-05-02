@@ -3,6 +3,7 @@ import Ball from '../sprites/Ball'
 
 import Storage from '../components/Storage'
 import LocalStorage from '../components/LocalStorage'
+import Settings from '../settings'
 
 import Control from '../components/Control'
 import KeyboardControl from '../components/KeyboardControl'
@@ -88,7 +89,7 @@ class GameScene extends Phaser.Scene {
         this.ball.on('finish', () => this.onBallFinished())
 
         // Level Text Label
-        new LevelText(this, this.level, this.maxLevel, this.width)
+        new LevelText(this, this.level, this.maxLevel, this.width).on('click', () => this.respawnLevel())
 
         // Save Button
         new SaveButton(this, this.width).on('saved', () => this.onSaveButtonPress())
@@ -135,15 +136,17 @@ class GameScene extends Phaser.Scene {
 
             this.isRunning = false
 
-            // Respawns level after 1 second
-            setTimeout(() => {
-                this.map.respawn()
-                this.ball.respawn()
-                this.camera.spawnMainCamera(this.ball.getPosition())
-                this.stopwatch.startTimer()
-                this.isRunning = true
-            }, 1000)
+            // Respawns level after delay
+            setTimeout(() => this.respawnLevel(), Settings.delayAfterDeath)
         }
+    }
+
+    private respawnLevel() {
+        this.map.respawn()
+        this.ball.respawn()
+        this.camera.spawnMainCamera(this.ball.getPosition())
+        this.stopwatch.startTimer()
+        this.isRunning = true
     }
 
     private onBallFinished() {

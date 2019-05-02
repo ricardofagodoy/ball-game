@@ -1,4 +1,5 @@
 import CollisionHandler from '../components/CollisionHandler'
+import Settings from '../settings'
 
 export default class Ball extends Phaser.Physics.Matter.Sprite {
    
@@ -60,7 +61,7 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
     }
 
     died() {
-        this.setTint(0xff0000)
+        this.setTint(Settings.colorDeath)
         this.isDead = true
         this.setVelocity(0, 0)
         this.setAngularVelocity(0)

@@ -1,23 +1,13 @@
-const KEY = 'HomeScene'
-let hasShownWinnerScreen = false
-
+import Settings from '../settings'
 import Storage from '../components/Storage'
 import LocalStorage from '../components/LocalStorage'
 
+const KEY = 'HomeScene'
+let hasShownWinnerScreen = false
+
 class HomeScene extends Phaser.Scene {
 
-    private LEVEL_TIME = {
-        1: 3.0,
-        2: 7.0,
-        3: 11.0,
-        4: 11.0,
-        5: 11.0,
-        6: 11.0,
-        7: 20.0
-    }
-
-    private MAX_LEVEL : number = Object.keys(this.LEVEL_TIME).length
-    private textStyle = { font: "25px Lucida Grande", fill: "#FFF" }
+    private MAX_LEVEL : number = Object.keys(Settings.times).length
     private currentLevel : number
     private storage : Storage
 
@@ -44,9 +34,8 @@ class HomeScene extends Phaser.Scene {
         const width = +this.scene.manager.game.config.width
 
         // Instructions button
-        this.add.text(width - 85, 30, 'Instructions', this.textStyle)
+        this.add.text(width - 85, 30, 'Instructions', Settings.style.home)
             .setOrigin(0.5)
-            .setFill('#58D68D')
             .setInteractive()
             .on('pointerdown', () => {
                 this.scene.stop(KEY)
@@ -73,31 +62,31 @@ class HomeScene extends Phaser.Scene {
             
             graphics.strokeRect(x, y, boxWidth, boxWidth)
 
-            // Fill on current level and already played
-            graphics.fillStyle(0x58A910, 0.5);
-
             // Draw level numbers
-            this.add.text(x + boxWidth/2, y + boxWidth/4, level.toString() , this.textStyle)
-                .setOrigin(0.5)
+            this.add.text(x + boxWidth/2, y + boxWidth/4, level.toString() , Settings.style.levelGrid).setOrigin(0.5)
                 
             // Time record
             const best = this.storage.getTime(level)
-            const levelTime = this.LEVEL_TIME[level]
+            const levelTime = Settings.times[level]
 
-            this.add.text(x + boxWidth/2, y + boxWidth/2, 'Best: ' + (best ? best + 's' : '--') , { font: "14px Lucida Grande", fill: "#FFF" })
+            this.add.text(x + boxWidth/2, y + boxWidth/2, Settings.best + ': ' + (best ? best + 's' : '--') , Settings.style.levelGrid)
                 .setOrigin(0.5)
 
-            this.add.text(x + boxWidth/2, y + boxWidth/1.4, 'Pro: ' + (levelTime ? levelTime + 's' : '--') , { font: "14px Lucida Grande", fill: "#FFF" })
+            this.add.text(x + boxWidth/2, y + boxWidth/1.4, Settings.pro + ': ' + (levelTime ? levelTime + 's' : '--') , Settings.style.levelGrid)
                 .setOrigin(0.5)
 
+            // Has already passed level
             if (level <= this.currentLevel) {
 
+                // Fill on current level and already played
+                graphics.fillStyle(Settings.levelColorPassed, 0.5);
+
                 if (level == this.currentLevel)
-                    graphics.fillStyle(0x64ACF0, 0.5);
+                    graphics.fillStyle(Settings.levelColorActual, 0.5);
 
                 // If user has Pro'ed a level
                 if (best <= levelTime) {
-                    graphics.fillStyle(0xDAD400, 0.5)
+                    graphics.fillStyle(Settings.levelColorPro, 0.5)
                     levelsGotPro++
                 }
 

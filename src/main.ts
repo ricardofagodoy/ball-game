@@ -1,4 +1,7 @@
-import "phaser";
+import "phaser"
+import Settings from './settings'
+
+// Scenes
 import GameScene from "./scenes/GameScene";
 import GameOverScene from "./scenes/GameOverScene";
 import InstructionsScene from "./scenes/InstructionsScene"
@@ -8,15 +11,15 @@ import WinnerScene from "./scenes/WinnerScene"
 let game
 
 const config: any = {
-  width: 450,
-  height: 700,
+  width: Settings.width,
+  height: Settings.height,
   type: Phaser.AUTO,
   scene: [HomeScene, GameScene, GameOverScene, InstructionsScene, WinnerScene],
-  backgroundColor: 0x000000,
+  backgroundColor: Settings.backgroundColor,
   physics: {
     default: "matter",
     matter: {
-      gravity: { y: 1 },
+      gravity: { y: Settings.gravityY },
       debug: false
     }
   }
