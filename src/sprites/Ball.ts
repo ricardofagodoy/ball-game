@@ -3,7 +3,7 @@ import Settings from '../settings'
 
 export default class Ball extends Phaser.Physics.Matter.Sprite {
    
-    private readonly SCALE = 0.5
+    private readonly SCALE = 0.4
 
     private bounceHeigth = 5
     private spawnX : number;
@@ -38,12 +38,11 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
     // Keep ball in the center
     update() {
         this.setX(this.spawnX)
+
+        this.absoluteY = Math.max(this.absoluteY, this.y)
     }
 
     bounce() {
-
-        this.absoluteY = Math.max(this.absoluteY, this.y)
-
         if (!this.isDead)
             this.setVelocityY(-this.bounceHeigth)
     }

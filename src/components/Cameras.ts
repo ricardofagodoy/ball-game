@@ -6,7 +6,7 @@ export default class Cameras {
     constructor(scene : Phaser.Scene, screenWidth : number, screenHeight : number) {
 
         this.scene = scene
-        this.startPoint = screenHeight / 2
+        this.startPoint = screenHeight / 3
 
         scene.cameras.add(0, 0, screenWidth, 50, false, 'header')
         this.spawnMainCamera(0)
@@ -22,6 +22,6 @@ export default class Cameras {
 
     update(ballPosition : number) : void {
         if (this.scene.cameras.main.scrollY < ballPosition - this.startPoint)
-            this.scene.cameras.main.scrollY+=1
+            this.scene.cameras.main.scrollY+=5
     }
 }

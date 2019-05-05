@@ -18,6 +18,9 @@ export default class Map {
         
         this.ground = tilemap.createStaticLayer(layer, tilemap.addTilesetImage('tiles'), 0, 0)
         this.ground.setCollisionByProperty({ collides: true });
+
+        //AnimatedTiles.init(tilemap)
+
         scene.matter.world.convertTilemapLayer(this.ground);
         
         this.dataLayer = tilemap.getLayer(this.ground)
