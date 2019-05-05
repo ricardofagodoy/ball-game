@@ -6,7 +6,7 @@ export default class Cameras {
     constructor(scene : Phaser.Scene, screenWidth : number, screenHeight : number) {
 
         this.scene = scene
-        this.startPoint = screenHeight / 3
+        this.startPoint = screenHeight / 2
 
         scene.cameras.add(0, 0, screenWidth, 50, false, 'header')
         this.spawnMainCamera(0)
@@ -14,10 +14,10 @@ export default class Cameras {
 
     spawnMainCamera(ballPosition : number) {
 
-        const moveCloseToBallOffset = ballPosition ? ballPosition/3 : 0
+        const moveCloseToBallOffset = ballPosition ? ballPosition/2 : 0
 
         this.scene.cameras.main.setPosition(0, 50)
-        this.scene.cameras.main.setScroll(0, 50 + moveCloseToBallOffset)
+        this.scene.cameras.main.setScroll(0, moveCloseToBallOffset - 50)
     }
 
     update(ballPosition : number) : void {

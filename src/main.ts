@@ -1,6 +1,4 @@
 import "phaser"
-import AnimatedTiles from 'phaser-animated-tiles/dist/AnimatedTiles.min.js'
-
 import Settings from './settings'
 
 // Scenes
@@ -10,19 +8,21 @@ import InstructionsScene from "./scenes/InstructionsScene"
 import HomeScene from "./scenes/HomeScene"
 import WinnerScene from "./scenes/WinnerScene"
 
+import AnimatedTiles from './plugins/AnimatedTiles.js' 
+
 let game
 
 const config: any = {
   width: Settings.width,
   height: Settings.height,
+  plugins: {
+    scene: [
+        { key: 'AnimatedTiles', plugin: AnimatedTiles, start: true, mapping: 'animatedTiles', sceneKey: 'animatedTiles' }
+    ]
+  },
   type: Phaser.AUTO,
   scene: [HomeScene, GameScene, GameOverScene, InstructionsScene, WinnerScene],
   backgroundColor: Settings.backgroundColor,
-  plugins: {
-    global: [
-        { key: 'AnimatedTiles', plugin: AnimatedTiles, start: true }
-      ]
-  },
   physics: {
     default: "matter",
     matter: {

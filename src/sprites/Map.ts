@@ -3,7 +3,7 @@ import Settings from '../settings'
 export default class Map {
     
     private scene : Phaser.Scene
-    private ground : Phaser.Tilemaps.StaticTilemapLayer
+    private ground : Phaser.Tilemaps.DynamicTilemapLayer
     private dataLayer : Phaser.Tilemaps.LayerData
 
     private spawnX : number
@@ -16,14 +16,25 @@ export default class Map {
         const tilemap = scene.make.tilemap({ key: 'map'});
         const layer = 'level' + level
         
-        this.ground = tilemap.createStaticLayer(layer, tilemap.addTilesetImage('tiles'), 0, 0)
+        this.ground = tilemap.createDynamicLayer(layer, tilemap.addTilesetImage('tiles'), 0, 0)
         this.ground.setCollisionByProperty({ collides: true });
 
-        //AnimatedTiles.init(tilemap)
-
         scene.matter.world.convertTilemapLayer(this.ground);
-        
+
         this.dataLayer = tilemap.getLayer(this.ground)
+
+        this.initAnimatedTiles(scene, tilemap)
+    }
+
+    initAnimatedTiles(scene : Phaser.Scene, tilemap : Phaser.Tilemaps.Tilemap) {
+
+        scene.sys['animatedTiles'].init(tilemap)
+        
+        const animationRate = this.dataLayer.properties['animationRate']
+
+        if (animationRate) {
+            scene.sys['animatedTiles'].setRate(+animationRate)
+        }
     }
 
     respawn() {
@@ -37,10 +48,6 @@ export default class Map {
 
     update(direction : number) {
         this.moveGroundX(direction * Settings.groundSpeed)
-    }
-
-    getMapBounce() : number {
-        return +this.dataLayer.properties['bounce']
     }
 
     private moveGroundX(offset : number) {

@@ -11,7 +11,7 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
     private absoluteY : number;
     private isDead : boolean = false
 
-    constructor(scene : Phaser.Scene, x : number, y : number, bounce? : number) {
+    constructor(scene : Phaser.Scene, x : number, y : number) {
 
         super(scene.matter.world, x, y, 'ball')
 
@@ -19,9 +19,6 @@ export default class Ball extends Phaser.Physics.Matter.Sprite {
         this.spawnY = y
         this.absoluteY = y
 
-        if (bounce)
-            this.bounceHeigth = bounce
-        
         this.setCircle(this.width / 2, {})
         this.setScale(this.SCALE)
         this.setSize(this.width * this.SCALE, this.height * this.SCALE)

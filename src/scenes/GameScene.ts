@@ -81,7 +81,7 @@ class GameScene extends Phaser.Scene {
         this.map = new Map(this, this.level)
 
         // Ball
-        this.ball = new Ball(this, this.width/2, 0, this.map.getMapBounce())
+        this.ball = new Ball(this, this.width/2, 0)
         this.add.existing(this.ball)
 
         // Ball events handling
