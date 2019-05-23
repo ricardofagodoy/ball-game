@@ -3,12 +3,12 @@ export default class Cameras {
     private scene : Phaser.Scene
     private startPoint : number // This is the position where camera will move to center the ball
 
-    constructor(scene : Phaser.Scene, screenWidth : number, screenHeight : number) {
+    constructor(scene : Phaser.Scene, size : any) {
 
         this.scene = scene
-        this.startPoint = screenHeight / 2
+        this.startPoint = size.height / 2
 
-        scene.cameras.add(0, 0, screenWidth, 50, false, 'header')
+        scene.cameras.add(0, 0, size.width, size.height/14, false, 'header')
         this.spawnMainCamera(0)
     }
 

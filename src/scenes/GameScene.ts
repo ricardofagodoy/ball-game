@@ -18,10 +18,13 @@ import BackButton from '../components/BackButton'
 
 const KEY = 'GameScene'
 
+const admobid = {
+    interstitial: 'ca-app-pub-2813072672105928/1598667999'
+}
+
 class GameScene extends Phaser.Scene {
 
-    private width
-    private height
+    private size : any
 
     // Control variables
     private level : number
@@ -45,8 +48,10 @@ class GameScene extends Phaser.Scene {
     init(data) {
 
         // Define game width and heigth
-        this.width = +this.scene.manager.game.config.width
-        this.height = +this.scene.manager.game.config.height
+        this.size = {
+            width: +this.scene.manager.game.config.width,
+            height: +this.scene.manager.game.config.height
+        }
 
         // Data received via parameter
         this.level = data.level
@@ -81,7 +86,7 @@ class GameScene extends Phaser.Scene {
         this.map = new Map(this, this.level)
 
         // Ball
-        this.ball = new Ball(this, this.width/2, 0)
+        this.ball = new Ball(this, this.size.width/2, 0)
         this.add.existing(this.ball)
 
         // Ball events handling
@@ -89,22 +94,25 @@ class GameScene extends Phaser.Scene {
         this.ball.on('finish', () => this.onBallFinished())
 
         // Level Text Label
-        new LevelText(this, this.level, this.maxLevel, this.width).on('click', () => this.respawnLevel())
+        new LevelText(this, this.level, this.maxLevel, this.size).on('click', () => this.respawnLevel())
 
         // Save Button
-        new SaveButton(this, this.width).on('saved', () => this.onSaveButtonPress())
+        new SaveButton(this, this.size).on('saved', () => this.onSaveButtonPress())
 
         // Back Button
-        new BackButton(this, this.width).on('click', () => this.goToHomeScene())
+        new BackButton(this, this.size).on('click', () => this.goToHomeScene())
 
         // Collision being handled
         this.matter.world.on("collisionstart", CollisionHandler.checkCollisions)
         
         // Camera settings
-        this.camera = new Cameras(this, this.width, this.height)
+        this.camera = new Cameras(this, this.size)
 
         // Saves start time of the level
         this.stopwatch.startTimer()
+
+        // Prepare interstitial ad
+        this.loadAd()
     }
 
     update () {
@@ -125,6 +133,10 @@ class GameScene extends Phaser.Scene {
     }
 
     private onSaveButtonPress() {
+
+        this.showAd();
+        this.loadAd()
+
         this.ball.saveCurrentPosition()
         this.map.saveCurrentPosition()
         this.stopwatch.storeLap()
@@ -151,6 +163,9 @@ class GameScene extends Phaser.Scene {
 
     private onBallFinished() {
 
+        // Show Ad
+        this.showAd()
+
         // Store possible best time
         this.storage.setTime(this.level, this.stopwatch.stopTimerInSeconds())
             
@@ -168,6 +183,19 @@ class GameScene extends Phaser.Scene {
             this.goToHomeScene()
         else
             this.scene.restart({level: this.level, maxLevel: this.maxLevel})
+    }
+
+    private loadAd() {
+        if (AdMob) 
+            AdMob.prepareInterstitial({
+                adId:admobid.interstitial, 
+                autoShow:false
+            })
+    }
+
+    private showAd() {
+        if (AdMob) 
+            AdMob.showInterstitial()
     }
 }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="10" height="14" tilewidth="45" tileheight="50" infinite="0" nextobjectid="1">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="10" height="25" tilewidth="45" tileheight="50" infinite="0" nextobjectid="1">
  <tileset firstgid="1" name="tiles" tilewidth="45" tileheight="50" tilecount="10" columns="10">
   <image source="tiles.png" width="450" height="50"/>
   <tile id="0">
@@ -14,57 +14,62 @@
   <tile id="1">
    <properties>
     <property name="collides" type="bool" value="true"/>
+    <property name="ground" type="bool" value="true"/>
     <property name="kill" type="bool" value="true"/>
    </properties>
    <objectgroup draworder="index">
-    <object id="9" x="7.07955" y="47.2045">
-     <polygon points="0,0 15.0968,-41.6704 30.5341,-0.140304"/>
+    <object id="9" x="0.647732" y="50.5681">
+     <polygon points="0,0 21.5805,-49.0795 43.6477,-0.16525"/>
     </object>
    </objectgroup>
   </tile>
   <tile id="2">
    <properties>
     <property name="collides" type="bool" value="true"/>
+    <property name="finish" type="bool" value="true"/>
    </properties>
    <objectgroup draworder="index">
-    <object id="6" x="0" y="0.125">
-     <polygon points="0,0 7.875,0 7.75,41.875 44.875,42 44.875,49.875 0.125,49.875"/>
-    </object>
+    <object id="7" x="0.25" y="42.25" width="44.5" height="7.25"/>
    </objectgroup>
   </tile>
   <tile id="3">
    <properties>
     <property name="collides" type="bool" value="true"/>
+    <property name="ground" type="bool" value="true"/>
+    <property name="kill" type="bool" value="true"/>
    </properties>
    <objectgroup draworder="index">
-    <object id="22" x="2.25" y="43" width="40.25" height="6">
-     <ellipse/>
-    </object>
-    <object id="23" x="37.75" y="2.25" width="6.25" height="38.75">
-     <ellipse/>
+    <object id="25" x="1.77273" y="50">
+     <polygon points="0,0 20.4118,-47.9886 41.2841,-0.161577"/>
     </object>
    </objectgroup>
+   <animation>
+    <frame tileid="3" duration="1000"/>
+    <frame tileid="0" duration="500"/>
+   </animation>
   </tile>
   <tile id="4">
    <properties>
     <property name="collides" type="bool" value="true"/>
+    <property name="ground" type="bool" value="true"/>
    </properties>
    <objectgroup draworder="index">
-    <object id="1" x="0.125" y="0" width="7.75" height="49.875"/>
+    <object id="1" x="0.125" y="41.5" width="44.5" height="8.375"/>
    </objectgroup>
   </tile>
   <tile id="5">
    <properties>
     <property name="collides" type="bool" value="true"/>
+    <property name="ground" type="bool" value="true"/>
    </properties>
    <objectgroup draworder="index">
-    <object id="1" x="37" y="0.125" width="7.875" height="50"/>
+    <object id="1" x="0.75" y="42.125" width="44.125" height="8"/>
    </objectgroup>
   </tile>
   <tile id="6">
    <properties>
     <property name="collides" type="bool" value="true"/>
-    <property name="finish" type="bool" value="true"/>
+    <property name="ground" type="bool" value="true"/>
    </properties>
    <objectgroup draworder="index">
     <object id="1" x="0" y="42.25" width="45" height="7.5"/>
@@ -73,155 +78,249 @@
   <tile id="7">
    <properties>
     <property name="collides" type="bool" value="true"/>
+    <property name="finish" type="bool" value="true"/>
    </properties>
    <objectgroup draworder="index">
-    <object id="1" x="0" y="0.25" width="44.75" height="7.625"/>
+    <object id="1" x="0" y="42.25" width="44.75" height="7.625"/>
    </objectgroup>
   </tile>
   <tile id="8">
    <properties>
     <property name="collides" type="bool" value="true"/>
+    <property name="ground" type="bool" value="true"/>
    </properties>
    <objectgroup draworder="index">
-    <object id="1" x="0" y="0.125" width="8" height="49.625"/>
-    <object id="2" x="8.375" y="0" width="36.625" height="8.125"/>
+    <object id="2" x="0.625" y="41.5" width="43.875" height="8.125"/>
    </objectgroup>
+   <animation>
+    <frame tileid="8" duration="1000"/>
+    <frame tileid="9" duration="500"/>
+   </animation>
   </tile>
   <tile id="9">
    <properties>
-    <property name="collides" type="bool" value="true"/>
+    <property name="collides" type="bool" value="false"/>
    </properties>
    <objectgroup draworder="index">
-    <object id="6" x="0" y="0.375">
-     <polyline points="0,0 44.875,-0.125 44.625,49.75 36.875,49.5 36.75,7.75 0.125,7.5 0,0.125"/>
+    <object id="1" x="1.25" y="1">
+     <polyline points="0,0 -0.5,0.5"/>
     </object>
    </objectgroup>
   </tile>
  </tileset>
- <layer name="level7" width="10" height="14" visible="0" locked="1">
+ <layer name="level7" width="10" height="25" visible="0" locked="1">
+  <properties>
+   <property name="animationRate" type="float" value="0.5"/>
+  </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,
-0,1,1,1,0,1,1,1,0,1,
 0,0,0,0,0,0,0,0,0,0,
-2,2,0,2,2,0,2,2,0,2,
-3,4,0,3,4,0,3,4,0,3,
 0,0,0,0,0,0,0,0,0,0,
-0,2,1,2,2,1,2,2,2,2,
+0,0,0,2,0,0,2,2,0,0,
 0,0,0,0,0,0,0,0,0,0,
-1,0,1,0,1,0,0,1,1,0,
+0,0,0,0,0,0,0,0,0,0,
+0,2,2,1,1,1,2,2,2,2,
+0,0,0,0,0,0,0,0,0,0,
+6,5,0,0,0,9,9,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
 2,2,2,2,2,2,2,0,2,2,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-7,7,7,7,2,2,2,2,2,7
+6,5,0,0,6,1,2,2,7,2,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+2,2,2,2,3,3,2,2,2,2,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="level6" width="10" height="14" visible="0" locked="1">
+ <layer name="level6" width="10" height="25" visible="0" locked="1">
+  <properties>
+   <property name="animationRate" type="float" value="0.20000000000000001"/>
+  </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,
-2,0,2,2,1,1,2,2,0,2,
+0,0,0,0,0,0,0,0,0,0,
+2,0,0,0,6,1,2,2,2,2,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-2,2,2,0,2,1,2,2,2,2,
+4,4,2,1,4,4,2,1,2,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-0,1,1,1,1,1,1,1,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-2,2,0,0,2,2,2,2,2,0,
 0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,2,2,0,
-1,1,1,2,2,2,7,3,4,2
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+9,9,9,9,9,9,4,4,4,4,
+3,3,3,3,3,3,3,3,3,3,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="level5" width="10" height="14" visible="0" locked="1">
+ <layer name="level5" width="10" height="25" visible="0" locked="1">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,
-0,1,1,1,1,1,1,1,1,0,
 0,0,0,0,0,0,0,0,0,0,
-1,1,0,2,2,2,2,0,1,1,
+0,6,1,1,1,1,1,1,5,0,
+0,0,0,0,0,0,0,0,0,0,
+6,5,0,2,2,2,5,0,6,5,
+0,0,0,0,0,0,0,0,0,0,
+2,2,0,2,2,2,2,1,1,5,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-0,2,0,2,2,2,2,1,1,0,
+2,2,2,0,0,2,2,2,2,2,
+0,0,0,0,0,0,0,0,0,0,
+0,2,2,5,0,0,0,0,6,5,
+0,0,0,0,0,0,0,0,0,0,
+2,3,2,3,2,3,3,3,2,3,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-2,2,2,2,0,2,2,2,2,2,
 0,0,0,0,0,0,0,0,0,0,
-0,2,2,1,0,2,2,0,2,2,
 0,0,0,0,0,0,0,0,0,0,
-2,7,2,7,2,7,2,7,2,7
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="level4" width="10" height="14" visible="0" locked="1">
+ <layer name="level4" width="10" height="25" visible="0" locked="1">
+  <properties>
+   <property name="animationRate" type="float" value="0.29999999999999999"/>
+  </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,1,1,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,6,5,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,1,0,
+0,0,0,0,0,0,0,0,7,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,2,2,2,
-0,0,0,1,1,0,0,0,0,0,
+0,0,0,6,5,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-2,2,2,2,2,2,2,2,0,0,
+2,2,2,2,2,2,2,2,2,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-7,7,1,1,1,1,1,1,1,2
+3,3,1,1,1,1,1,1,1,2,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="level3" width="10" height="14" visible="0" locked="1">
+ <layer name="level3" width="10" height="25" visible="0" locked="1">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,1,0,
 0,0,0,0,0,0,0,0,0,0,
-1,7,7,1,1,2,2,2,0,0,
+6,1,1,1,1,1,1,5,0,0,
 0,0,0,0,0,0,0,0,0,0,
-0,0,0,1,1,0,1,1,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,6,1,5,0,6,1,1,5,
 0,0,0,0,0,0,0,0,0,0,
 0,0,2,2,2,2,2,2,2,2,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-2,1,1,1,2,2,1,1,0,0,
+6,1,1,2,1,2,1,5,0,0,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-1,7,7,7,7,7,1,1,1,1
+6,3,3,3,3,3,1,1,1,5,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="level2" width="10" height="14" visible="0" locked="1">
+ <layer name="level2" width="10" height="25" visible="0" locked="1">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,
-1,1,2,1,1,1,1,1,0,0,
-0,0,0,0,0,0,0,0,0,0,
-0,0,1,1,1,1,2,1,1,1,
-0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,2,0,0,
-0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,0,0,0,1,1,1,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-1,2,2,1,1,1,1,1,0,0,
+0,0,6,1,1,1,1,2,1,5,
+0,0,0,0,0,0,0,0,0,0,
+6,1,1,1,2,1,5,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+6,1,1,5,0,0,0,6,1,5,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-7,7,1,2,1,2,1,1,1,1
+6,2,2,1,1,1,1,5,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+3,3,1,1,1,2,1,1,1,5,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <layer name="level1" width="10" height="14">
+ <layer name="level1" width="10" height="25">
+  <properties>
+   <property name="gravity" type="float" value="1"/>
+  </properties>
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,0,0,
-1,1,1,2,2,2,2,1,0,0,
-0,0,1,1,1,1,1,1,1,1,
 0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,1,1,1,0,0,
+0,0,0,0,6,5,0,0,0,0,
+0,7,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-0,0,0,1,1,1,1,1,1,1,
+6,1,1,1,1,1,1,5,0,0,
 0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,
-1,1,1,1,1,7,7,1,0,0,
+0,0,0,6,1,1,1,1,1,5,
 0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,
-2,2,2,2,2,2,2,2,2,2
+6,1,1,1,1,3,3,5,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+2,2,2,2,2,2,2,2,2,2,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
 </map>

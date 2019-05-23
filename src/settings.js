@@ -38,12 +38,12 @@ export default {
         },
     
         level: {
-            font: "25px Lucida Grande", 
+            font: "30px Lucida Grande", 
             fill: "#FFF"
         },
     
         save: {
-            font: "25px Lucida Grande", 
+            font: "35px Lucida Grande", 
             fill: "#58D68D"
         },
 

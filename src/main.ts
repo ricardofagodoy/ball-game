@@ -3,7 +3,6 @@ import Settings from './settings'
 
 // Scenes
 import GameScene from "./scenes/GameScene";
-import GameOverScene from "./scenes/GameOverScene";
 import InstructionsScene from "./scenes/InstructionsScene"
 import HomeScene from "./scenes/HomeScene"
 import WinnerScene from "./scenes/WinnerScene"
@@ -21,7 +20,7 @@ const config: any = {
     ]
   },
   type: Phaser.AUTO,
-  scene: [HomeScene, GameScene, GameOverScene, InstructionsScene, WinnerScene],
+  scene: [HomeScene, GameScene, InstructionsScene, WinnerScene],
   backgroundColor: Settings.backgroundColor,
   physics: {
     default: "matter",
@@ -37,7 +36,14 @@ window.onload = () => {
   resize();
   window.focus();
   window.addEventListener("resize", resize, false);
-};
+
+  // Load banner ad
+  if(AdMob) {
+    AdMob.setOptions({
+      isTesting: true
+    })
+  }
+}
 
 function resize() {
 

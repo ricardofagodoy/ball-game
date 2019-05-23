@@ -32,8 +32,10 @@ class HomeScene extends Phaser.Scene {
     preload () {
 
         const width = +this.scene.manager.game.config.width
+        const height = +this.scene.manager.game.config.height
 
         // Instructions button
+        /*
         this.add.text(width - 85, 30, 'Instructions', Settings.style.home)
             .setOrigin(0.5)
             .setInteractive()
@@ -41,13 +43,14 @@ class HomeScene extends Phaser.Scene {
                 this.scene.stop(KEY)
                 this.scene.start('InstructionsScene')
             })
+        */
 
         const graphics = this.add.graphics()
 
         // Levels table
         graphics.lineStyle(2, 0xffffff, 1);
     
-        const globalYPadding = 50
+        const globalYPadding = height/14
         const padding = 20
         const levelsPerRow = 3
         const boxWidth = (width - padding*(levelsPerRow+1)) / levelsPerRow
@@ -106,6 +109,20 @@ class HomeScene extends Phaser.Scene {
             hasShownWinnerScreen = true
             this.scene.start('WinnerScene')
         }
+
+        document.addEventListener("backbutton", () => {
+            navigator['app'].exitApp()
+        }, false)
+
+        this.loadAd()
+    }
+
+    private async loadAd() {
+        AdMob.createBanner({
+            adId: 'ca-app-pub-2813072672105928/9429056559',
+            position: AdMob.AD_POSITION.BOTTOM_CENTER,
+            autoShow: true
+        })
     }
 }
 
