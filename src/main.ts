@@ -38,6 +38,35 @@ window.onload = () => {
   window.addEventListener("resize", resize, false);
 }
 
+function onDeviceReady() {
+
+  document.removeEventListener('deviceready', onDeviceReady, false);
+
+  const AdMob = window['admob']
+  const isTesting = true
+
+  AdMob.banner.config({
+    id: 'ca-app-pub-2813072672105928/9429056559',
+    autoShow: true,
+    isTesting: isTesting
+   })
+
+   AdMob.interstitial.config({
+    id: 'ca-app-pub-2813072672105928/1598667999',
+    autoShow: false,
+    isTesting: isTesting
+   })
+   
+   AdMob.interstitial.prepare()
+
+   AdMob.banner.prepare()
+   AdMob.banner.show()
+}
+
+/* Device ready */
+document.addEventListener("deviceready", onDeviceReady, false);
+
+/* Backbutton */
 document.addEventListener("backbutton", () => {}, false);
 
 function resize() {

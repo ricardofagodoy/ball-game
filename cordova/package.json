@@ -9,13 +9,17 @@
     ],
     "plugins": {
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-whitelist": {}
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-admob-free": {
+        "ADMOB_APP_ID": "ca-app-pub-2813072672105928~2865725620"
+      }
     }
   },
   "dependencies": {
     "cordova-admob-sdk": "^0.24.1",
     "cordova-android": "^7.1.4",
     "cordova-browser": "^5.0.4",
+    "cordova-plugin-admob-free": "^0.27.0",
     "cordova-plugin-extension": "^1.5.4",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-whitelist": "1",

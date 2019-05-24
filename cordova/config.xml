@@ -25,6 +25,9 @@
     <preference name="StatusBarOverlaysWebView" value="false" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-admob-free" spec="^0.27.0">
+        <variable name="ADMOB_APP_ID" value="ca-app-pub-2813072672105928~2865725620" />
+    </plugin>
     <engine name="android" spec="^7.1.4" />
     <engine name="browser" spec="^5.0.4" />
 </widget>
