@@ -18,10 +18,6 @@ import BackButton from '../components/BackButton'
 
 const KEY = 'GameScene'
 
-const admobid = {
-    interstitial: 'ca-app-pub-2813072672105928/1598667999'
-}
-
 class GameScene extends Phaser.Scene {
 
     private size : any
@@ -110,9 +106,6 @@ class GameScene extends Phaser.Scene {
 
         // Saves start time of the level
         this.stopwatch.startTimer()
-
-        // Prepare interstitial ad
-        this.loadAd()
     }
 
     update () {
@@ -135,7 +128,6 @@ class GameScene extends Phaser.Scene {
     private onSaveButtonPress() {
 
         this.showAd();
-        this.loadAd()
 
         this.ball.saveCurrentPosition()
         this.map.saveCurrentPosition()
@@ -183,14 +175,6 @@ class GameScene extends Phaser.Scene {
             this.goToHomeScene()
         else
             this.scene.restart({level: this.level, maxLevel: this.maxLevel})
-    }
-
-    private loadAd() {
-        if (AdMob) 
-            AdMob.prepareInterstitial({
-                adId:admobid.interstitial, 
-                autoShow:false
-            })
     }
 
     private showAd() {

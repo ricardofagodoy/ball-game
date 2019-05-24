@@ -36,14 +36,9 @@ window.onload = () => {
   resize();
   window.focus();
   window.addEventListener("resize", resize, false);
-
-  // Load banner ad
-  if(AdMob) {
-    AdMob.setOptions({
-      isTesting: true
-    })
-  }
 }
+
+document.addEventListener("backbutton", () => {}, false);
 
 function resize() {
 

@@ -13,9 +13,5 @@ export default class SaveButton extends Phaser.GameObjects.GameObject {
         this.text.setInteractive().on('pointerdown', () => {
             this.emit('click')
         })
-
-        document.addEventListener("backbutton", () => {
-            this.emit('click')
-        }, false);
     }
 }

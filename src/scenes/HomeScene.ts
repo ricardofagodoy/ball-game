@@ -1,6 +1,7 @@
 import Settings from '../settings'
 import Storage from '../components/Storage'
 import LocalStorage from '../components/LocalStorage'
+import BackButton from '../components/BackButton'
 
 const KEY = 'HomeScene'
 let hasShownWinnerScreen = false
@@ -110,19 +111,8 @@ class HomeScene extends Phaser.Scene {
             this.scene.start('WinnerScene')
         }
 
-        document.addEventListener("backbutton", () => {
-            navigator['app'].exitApp()
-        }, false)
-
-        this.loadAd()
-    }
-
-    private async loadAd() {
-        AdMob.createBanner({
-            adId: 'ca-app-pub-2813072672105928/9429056559',
-            position: AdMob.AD_POSITION.BOTTOM_CENTER,
-            autoShow: true
-        })
+        // Back Button
+        new BackButton(this, {width: width, height: height}).on('click', () => navigator['app'].exitApp())
     }
 }
 

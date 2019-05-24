@@ -25,9 +25,6 @@
     <preference name="StatusBarOverlaysWebView" value="false" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
-    <plugin name="cordova-plugin-admobpro" spec="^2.37.2">
-        <variable name="PLAY_SERVICES_VERSION" value="16.0.0" />
-    </plugin>
     <engine name="android" spec="^7.1.4" />
     <engine name="browser" spec="^5.0.4" />
 </widget>
