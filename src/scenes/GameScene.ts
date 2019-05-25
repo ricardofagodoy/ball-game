@@ -179,8 +179,6 @@ class GameScene extends Phaser.Scene {
 
     private showAd() {
         window['admob'].interstitial.show()
-
-        setTimeout(() => window['admob'].interstitial.prepare(), 2000)
     }
 }
 

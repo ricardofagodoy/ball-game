@@ -43,24 +43,21 @@ function onDeviceReady() {
   document.removeEventListener('deviceready', onDeviceReady, false);
 
   const AdMob = window['admob']
-  const isTesting = true
 
   AdMob.banner.config({
-    id: 'ca-app-pub-2813072672105928/9429056559',
+    id: Settings.Ads.banner,
     autoShow: true,
-    isTesting: isTesting
+    isTesting: Settings.Ads.isTesting
    })
 
    AdMob.interstitial.config({
-    id: 'ca-app-pub-2813072672105928/1598667999',
+    id: Settings.Ads.interstitial,
     autoShow: false,
-    isTesting: isTesting
+    isTesting: Settings.Ads.isTesting
    })
    
-   AdMob.interstitial.prepare()
-
    AdMob.banner.prepare()
-   AdMob.banner.show()
+   AdMob.interstitial.prepare()
 }
 
 /* Device ready */

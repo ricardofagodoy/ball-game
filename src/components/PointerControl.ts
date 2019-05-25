@@ -12,7 +12,8 @@ export default class PointerControl implements Control {
         this.movement = 0
         this.width = +scene.scene.manager.game.config.width
 
-        scene.input.addPointer(1);
+        if (!scene.input.activePointer)
+            scene.input.addPointer(1);
 
         scene.input.on('pointerdown', this.handlePointerDown.bind(this))
         scene.input.on('pointerup', this.handlePointerUp.bind(this))

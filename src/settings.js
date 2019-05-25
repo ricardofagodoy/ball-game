@@ -31,6 +31,12 @@ export default {
         time: 'time'
     },
 
+    Ads: {
+        isTesting: false,
+        banner: 'ca-app-pub-2813072672105928/9429056559',
+        interstitial: 'ca-app-pub-2813072672105928/1598667999'
+    },
+
     style: {
         back: {
             font: "40px Lucida Grande", 
