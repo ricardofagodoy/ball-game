@@ -178,7 +178,8 @@ class GameScene extends Phaser.Scene {
     }
 
     private showAd() {
-        window['admob'].interstitial.show()
+        if (window['admob'])
+            window['admob'].interstitial.show()
     }
 }
 

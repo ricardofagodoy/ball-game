@@ -3,7 +3,6 @@ import Settings from './settings'
 
 // Scenes
 import GameScene from "./scenes/GameScene";
-import InstructionsScene from "./scenes/InstructionsScene"
 import HomeScene from "./scenes/HomeScene"
 import WinnerScene from "./scenes/WinnerScene"
 
@@ -20,7 +19,7 @@ const config: any = {
     ]
   },
   type: Phaser.AUTO,
-  scene: [HomeScene, GameScene, InstructionsScene, WinnerScene],
+  scene: [HomeScene, GameScene, WinnerScene],
   backgroundColor: Settings.backgroundColor,
   physics: {
     default: "matter",
@@ -43,6 +42,9 @@ function onDeviceReady() {
   document.removeEventListener('deviceready', onDeviceReady, false);
 
   const AdMob = window['admob']
+
+  if (!AdMob)
+    return
 
   AdMob.banner.config({
     id: Settings.Ads.banner,

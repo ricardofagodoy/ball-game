@@ -2,7 +2,7 @@ const KEY = 'WinnerScene'
 
 import BackButton from '../components/BackButton'
 
-class InstructionsScene extends Phaser.Scene {
+class WinnerScene extends Phaser.Scene {
 
     private textStyle = { font: "40px Lucida Grande", fill: "#FF0" }
 
@@ -19,10 +19,10 @@ class InstructionsScene extends Phaser.Scene {
         this.add.text(width/2, height/2, 'Thanks for playing :-)', { font: "25px Lucida Grande", fill: "#FFF" }).setOrigin(0.5)
 
         // Back Button
-        new BackButton(this, width).on('click', () => {
+        new BackButton(this, {width, height}).on('click', () => {
             this.scene.start('HomeScene')
         })
     }
 }
 
-export default InstructionsScene
+export default WinnerScene
