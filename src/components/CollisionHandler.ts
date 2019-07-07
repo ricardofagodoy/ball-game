@@ -26,8 +26,10 @@ export default {
 
             const properties = object.tile.properties
 
-            if (properties['kill'] && !isCollidingBellowTile(ball, object.tile))
+            if (properties['kill'] && !isCollidingBellowTile(ball, object.tile)) {
+                ball.died()
                 return ball.emit('died')
+            }
 
             if (properties['finish'])
                 return ball.emit('finish')

@@ -1,23 +1,20 @@
-export default class LevelText {
+import Settings from '../settings'
+
+export default class LevelText extends Phaser.GameObjects.GameObject {
 
     private levelText : Phaser.GameObjects.Text
-    private textStyle = {font: "25px Lucida Grande", fill: "#FFF"}
     private maxLevel : number
 
-    constructor(scene : Phaser.Scene, currentLevel : number, maxLevel : number) {
+    constructor(scene : Phaser.Scene, currentLevel : number, maxLevel : number, size : any) {
         
-        scene.add.text(15, 15, 'Level ', this.textStyle)
-        
-        this.levelText = scene.add.text(80, 15, '', this.textStyle)
+        super(scene, 'LevelText')
+
+        this.levelText = scene.add.text(size.width / 2, size.height/20, '', Settings.style.level).setOrigin(0.5)
         this.maxLevel = maxLevel
 
         this.updateLevel(currentLevel)
 
-        // REMOVE ME!!!
-        this.levelText.setInteractive().on('pointerdown', () => {
-            window.localStorage.setItem('level', '1')
-            scene.scene.restart()
-        })
+        this.levelText.setInteractive().on('pointerdown', () => this.emit('click'))
     }
 
     updateLevel(level : number) {

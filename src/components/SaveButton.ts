@@ -1,17 +1,16 @@
+import Settings from '../settings'
+
 export default class SaveButton extends Phaser.GameObjects.GameObject {
 
     private saved : boolean
     private saveText : Phaser.GameObjects.Text
-    private textStyle = {font: "25px Lucida Grande", fill: "#FFF"}
 
-    constructor(scene : Phaser.Scene, gameWidth : number) {
+    constructor(scene : Phaser.Scene, size : any) {
 
         super(scene, 'SaveButton')
 
         this.saved = false
-        this.saveText = scene.add.text(gameWidth - 15, 15, 'Save', this.textStyle)
-            .setOrigin(1, 0)
-            .setFill('#58D68D')
+        this.saveText = scene.add.text(size.width * 0.9, size.height/45, 'Save', Settings.style.save).setOrigin(1, 0)
 
         this.saveText.setInteractive().on('pointerdown', () => {
 
@@ -24,7 +23,5 @@ export default class SaveButton extends Phaser.GameObjects.GameObject {
 
             this.emit('saved')
         })
-
     }
-
 }
