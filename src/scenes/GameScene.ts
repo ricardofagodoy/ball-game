@@ -65,17 +65,25 @@ class GameScene extends Phaser.Scene {
 
     preload () {
 
+        let loadingText = undefined
+
         // Loading text
-        const loadingText = this.make.text({
-            x: this.size.width / 2,
-            y: this.size.height / 2,
-            text: 'Loading...'
+        this.load.on('progress', (value) => {
+
+            if (loadingText)
+                return
+
+            loadingText = this.make.text({
+                x: this.size.width / 2,
+                y: this.size.height / 2,
+                text: 'Loading...'
+            })
+    
+            loadingText.setOrigin(0.5, 0.5)
         })
 
-        loadingText.setOrigin(0.5, 0.5)
-
         // Destroy loading text when done
-        this.load.on('complete', function () {
+        this.load.on('complete', () => {
             loadingText.destroy()
         })
 

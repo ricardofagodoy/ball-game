@@ -112,7 +112,13 @@ class HomeScene extends Phaser.Scene {
         }
 
         // Back Button
-        new BackButton(this, {width: width, height: height}).on('click', () => navigator['app'].exitApp())
+        new BackButton(this, {width: width, height: height}).on('click', () => {
+            
+            if (navigator['app'])
+                navigator['app'].exitApp()
+            else
+                window.close()
+        })
     }
 }
 

@@ -1,4 +1,5 @@
 rm -rf dist
+rm -rf build
 mkdir dist
 
 npm run build
