@@ -1,6 +1,5 @@
 .DS_STORE
 build
 node_modules
-dist
 cordova/platforms/android
 key
