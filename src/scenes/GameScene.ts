@@ -65,6 +65,20 @@ class GameScene extends Phaser.Scene {
 
     preload () {
 
+        // Loading text
+        const loadingText = this.make.text({
+            x: this.size.width / 2,
+            y: this.size.height / 2,
+            text: 'Loading...'
+        })
+
+        loadingText.setOrigin(0.5, 0.5)
+
+        // Destroy loading text when done
+        this.load.on('complete', function () {
+            loadingText.destroy()
+        })
+
         // Map and tiles
         this.load.image('tiles', 'assets/tiles.png');
         this.load.tilemapTiledJSON('map', 'assets/levels.json');

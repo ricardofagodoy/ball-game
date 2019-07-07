@@ -35,6 +35,15 @@ window.onload = () => {
   resize();
   window.focus();
   window.addEventListener("resize", resize, false);
+
+  // Install sw
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/build/sw.js').then(registration => {
+      console.log('SW registered: ', registration);
+    }).catch(registrationError => {
+      console.log('SW registration failed: ', registrationError);
+    });
+  }
 }
 
 function onDeviceReady() {
