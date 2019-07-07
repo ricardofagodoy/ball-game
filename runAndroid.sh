@@ -8,4 +8,5 @@ cp -r assets cordova/www
 cp manifest.json cordova/www
 
 cd cordova
+cordova platforms add android
 cordova run android

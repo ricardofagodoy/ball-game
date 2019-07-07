@@ -7,30 +7,24 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-admob-free": {
-      "ADMOB_APP_ID": "ca-app-pub-2813072672105928~2865725620",
-      "PLAY_SERVICES_VERSION": "11.0.4",
-      "PACKAGE_NAME": "io.github.ricardofagodoy"
-    },
     "cordova-plugin-splashscreen": {
       "PACKAGE_NAME": "io.github.ricardofagodoy"
     },
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "io.github.ricardofagodoy"
+    },
+    "cordova-plugin-admob-free": {
+      "ADMOB_APP_ID": "ca-app-pub-2813072672105928~2865725620",
+      "PLAY_SERVICES_VERSION": "11.0.4",
+      "PACKAGE_NAME": "io.github.ricardofagodoy"
     }
   },
   "dependent_plugins": {
-    "cordova-admob-sdklibs": {
-      "PACKAGE_NAME": "io.github.ricardofagodoy"
-    },
     "cordova-promise-polyfill": {
       "PACKAGE_NAME": "io.github.ricardofagodoy"
     },
     "cordova-admob-sdk": {
       "PLAY_SERVICES_VERSION": "11.0.4",
-      "PACKAGE_NAME": "io.github.ricardofagodoy"
-    },
-    "cordova-plugin-extension": {
       "PACKAGE_NAME": "io.github.ricardofagodoy"
     }
   }

@@ -1,19 +1,19 @@
 {
-  "_from": "cordova-plugin-admob-free",
+  "_from": "cordova-plugin-admob-free@^0.27.0",
   "_id": "cordova-plugin-admob-free@0.27.0",
   "_inBundle": false,
   "_integrity": "sha512-4QP89i3maFivk2GN8uAfaPDjwSAwvfrxkJu6pV1+ZJbPSAlp1OhNeXUbXXK8VXNNkoEWqLFQ2TCU1c09ybdATQ==",
   "_location": "/cordova-plugin-admob-free",
   "_phantomChildren": {},
   "_requested": {
-    "type": "tag",
+    "type": "range",
     "registry": true,
-    "raw": "cordova-plugin-admob-free",
+    "raw": "cordova-plugin-admob-free@^0.27.0",
     "name": "cordova-plugin-admob-free",
     "escapedName": "cordova-plugin-admob-free",
-    "rawSpec": "",
+    "rawSpec": "^0.27.0",
     "saveSpec": null,
-    "fetchSpec": "latest"
+    "fetchSpec": "^0.27.0"
   },
   "_requiredBy": [
     "#USER",
@@ -21,7 +21,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/cordova-plugin-admob-free/-/cordova-plugin-admob-free-0.27.0.tgz",
   "_shasum": "1f695043a2ef3545a9457bab624c196f02f32ec2",
-  "_spec": "cordova-plugin-admob-free",
+  "_spec": "cordova-plugin-admob-free@^0.27.0",
   "_where": "/Users/ricardogodoy/Repository/ball-game/cordova",
   "author": {
     "name": "Ratson"
