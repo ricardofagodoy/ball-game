@@ -108,7 +108,7 @@
    </objectgroup>
   </tile>
  </tileset>
- <layer name="level8" width="10" height="25">
+ <layer name="level8" width="10" height="25" visible="0" locked="1">
   <properties>
    <property name="gravity" type="float" value="1"/>
   </properties>

@@ -17,7 +17,8 @@ export default {
         4: 11.0,
         5: 11.0,
         6: 11.0,
-        7: 20.0
+        7: 20.0,
+        8: 10.0
     },
 
     best: 'Best',
@@ -33,8 +34,8 @@ export default {
 
     Ads: {
         isTesting: false,
-        banner: 'ca-app-pub-2813072672105928/9429056559',
-        interstitial: 'ca-app-pub-2813072672105928/1598667999'
+        banner: 'ca-app-pub-2813072672105928/4880034890',
+        interstitial: 'ca-app-pub-2813072672105928/3375381537'
     },
 
     style: {
