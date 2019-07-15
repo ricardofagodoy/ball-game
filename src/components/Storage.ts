@@ -5,4 +5,6 @@ export default interface Storage {
     setLevel(level : number) : void
     setTime(level : number, time : number) : void
     getTime(level : number) : number
+    getDifficulty() : number
+    setDifficulty(difficulty : number) : void
 }

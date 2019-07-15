@@ -2,10 +2,22 @@ import Control from './Control'
 
 export default class KeyboardControl implements Control {
 
-    private readonly cursors : CursorKeys
+    private readonly scene : Phaser.Scene
+    private cursors : CursorKeys
 
     constructor(scene : Phaser.Scene) {
-        this.cursors = scene.input.keyboard.createCursorKeys()
+        this.scene = scene
+    }
+
+    create() : void {
+
+        this.scene.input.keyboard.removeKey('left')
+        this.scene.input.keyboard.removeKey('right')
+
+        this.cursors = this.scene.input.keyboard.addKeys({
+            left: 'left',
+            right: 'right'
+        })
     }
 
     update() : number {

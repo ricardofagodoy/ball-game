@@ -1,14 +1,15 @@
 import Settings from '../settings'
 
-export default class SaveButton extends Phaser.GameObjects.GameObject {
+export default class Difficulty extends Phaser.GameObjects.GameObject {
 
     private text : Phaser.GameObjects.Text
 
     constructor(scene : Phaser.Scene, size : any) {
 
-        super(scene, 'BackButton')
+        super(scene, 'Difficulty')
 
-        this.text = scene.add.text(size.width*0.04, size.height/50, '<<<', Settings.style.back).setOrigin(0, 0)
+        this.text = scene.add.text(size.width/2.1, size.height/20, 'Dificuldade', Settings.style.home)
+        .setOrigin(0.5)
 
         this.text.setInteractive().on('pointerdown', () => {
             this.emit('click')

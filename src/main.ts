@@ -4,7 +4,9 @@ import Settings from './settings'
 // Scenes
 import GameScene from "./scenes/GameScene";
 import HomeScene from "./scenes/HomeScene"
+import InstructionScene from "./scenes/InstructionScene"
 import WinnerScene from "./scenes/WinnerScene"
+import DifficultyScene from "./scenes/DifficultyScene"
 
 import AnimatedTiles from './plugins/AnimatedTiles.js' 
 
@@ -19,7 +21,7 @@ const config: any = {
     ]
   },
   type: Phaser.AUTO,
-  scene: [HomeScene, GameScene, WinnerScene],
+  scene: [HomeScene, GameScene, InstructionScene, DifficultyScene, WinnerScene],
   backgroundColor: Settings.backgroundColor,
   physics: {
     default: "matter",

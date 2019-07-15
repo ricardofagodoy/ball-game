@@ -10,7 +10,7 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.ts$/, loader: 'ts-loader', exclude: '/node_modules/' },
+      { test: /\.ts$/, loader: 'ts-loader', exclude: '/node_modules/', options: { transpileOnly: true } },
       { test: /phaser\.js$/, loader: 'expose-loader?Phaser' }
     ]
   },

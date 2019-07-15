@@ -97,14 +97,16 @@ class GameScene extends Phaser.Scene {
     
     create () {
 
+        const difficulty = this.storage.getDifficulty()
+
         // It's alive!
         this.isRunning = true
 
         // Map
-        this.map = new Map(this, this.level)
+        this.map = new Map(this, this.level, difficulty)
 
         // Ball
-        this.ball = new Ball(this, this.size.width/2, 0)
+        this.ball = new Ball(this, this.size.width/2, 0, difficulty)
         this.add.existing(this.ball)
 
         // Ball events handling
@@ -128,6 +130,9 @@ class GameScene extends Phaser.Scene {
 
         // Saves start time of the level
         this.stopwatch.startTimer()
+
+        // Init controls
+        this.control.create()
     }
 
     update () {
@@ -138,7 +143,8 @@ class GameScene extends Phaser.Scene {
         // Update all sprites
         this.ball.update()
         this.map.update(this.control.update())
-        this.camera.update(this.ball.getPosition())
+        //this.camera.update(this.ball.getPosition())
+        this.camera.update(this.ball)
     }
 
     private goToHomeScene() {

@@ -8,33 +8,30 @@ export default class Map {
 
     private spawnX : number
 
-    constructor(scene : Phaser.Scene, level : number) {
+    constructor(scene : Phaser.Scene, level : number, difficulty : number) {
 
         this.spawnX = 0
         this.scene = scene
 
-        const tilemap = scene.make.tilemap({ key: 'map'});
+        const tilemap = scene.make.tilemap({ key: 'map'})
         const layer = 'level' + level
-        
-        this.ground = tilemap.createDynamicLayer(layer, tilemap.addTilesetImage('tiles'), 0, 0)
-        this.ground.setCollisionByProperty({ collides: true });
 
-        scene.matter.world.convertTilemapLayer(this.ground);
+        this.ground = tilemap.createDynamicLayer(layer, tilemap.addTilesetImage('tiles'), 0, 0)
+        this.ground.setCollisionByProperty({ collides: true })
+
+        scene.matter.world.convertTilemapLayer(this.ground)
 
         this.dataLayer = tilemap.getLayer(this.ground)
 
-        this.initAnimatedTiles(scene, tilemap)
+        this.initAnimatedTiles(scene, tilemap, difficulty)
     }
 
-    initAnimatedTiles(scene : Phaser.Scene, tilemap : Phaser.Tilemaps.Tilemap) {
+    initAnimatedTiles(scene : Phaser.Scene, tilemap : Phaser.Tilemaps.Tilemap, difficulty : number) {
 
         scene.sys['animatedTiles'].init(tilemap)
         
-        const animationRate = this.dataLayer.properties['animationRate']
-
-        if (animationRate) {
-            scene.sys['animatedTiles'].setRate(+animationRate)
-        }
+        const animationRate = this.dataLayer.properties['animationRate'] || 1.0
+        scene.sys['animatedTiles'].setRate(+animationRate*difficulty)
     }
 
     respawn() {

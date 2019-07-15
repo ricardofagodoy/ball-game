@@ -1,3 +1,5 @@
+import Ball from '../sprites/Ball'
+
 export default class Cameras {
    
     private scene : Phaser.Scene
@@ -20,8 +22,14 @@ export default class Cameras {
         this.scene.cameras.main.setScroll(0, moveCloseToBallOffset - 50)
     }
 
-    update(ballPosition : number) : void {
-        if (this.scene.cameras.main.scrollY < ballPosition - this.startPoint)
-            this.scene.cameras.main.scrollY+=5
+    update(ball : Ball) : void {
+        if (this.scene.cameras.main.scrollY < ball.getPosition() - this.startPoint) {
+            this.scene.cameras.main.startFollow(ball)
+            ball.startedFalling()
+        }
+        else {
+            this.scene.cameras.main.stopFollow()
+            ball.endedFalling()
+        }
     }
 }

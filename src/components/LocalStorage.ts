@@ -3,6 +3,7 @@ import Settings from '../settings'
 
 const LEVEL = Settings.storage.level
 const TIME = Settings.storage.time
+const DIFFICULTY = Settings.storage.difficulty
 
 export default class LocalStorage implements Storage {
 
@@ -48,5 +49,16 @@ export default class LocalStorage implements Storage {
         const time = JSON.parse(window.localStorage.getItem(TIME))
 
         return time[level] ? parseFloat(time[level]) : undefined 
+    }
+
+    getDifficulty() : number {
+
+        const difficulty = window.localStorage.getItem(DIFFICULTY)
+
+        return difficulty ? parseFloat(difficulty) : 0.3
+    }
+
+    setDifficulty(difficulty : number) : void {
+        window.localStorage.setItem(DIFFICULTY, difficulty.toString())
     }
 }

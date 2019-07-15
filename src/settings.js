@@ -8,18 +8,8 @@ export default {
     colorDeath: 0xff0000,
     gravityY: 1,
 
+    bounceHeigth: 5,
     groundSpeed: 5,
-
-    times: {
-        1: 3.0,
-        2: 7.0,
-        3: 11.0,
-        4: 11.0,
-        5: 11.0,
-        6: 11.0,
-        7: 20.0,
-        8: 10.0
-    },
 
     best: 'Best',
     pro: 'Pro',
@@ -29,7 +19,8 @@ export default {
 
     storage: {
         level: 'level',
-        time: 'time'
+        time: 'time',
+        difficulty: 'difficulty'
     },
 
     Ads: {
@@ -40,7 +31,7 @@ export default {
 
     style: {
         back: {
-            font: "40px Lucida Grande", 
+            font: "35px Lucida Grande", 
             fill: "#58D68D"
         },
     
@@ -62,6 +53,12 @@ export default {
         levelGrid: { 
             font: "14px Lucida Grande", 
             fill: "#FFF" 
+        },
+
+        difficulty: {
+            font: "55px Lucida Grande", 
+            fill: "#FFF", 
+            align: 'center'
         }
     }
 }

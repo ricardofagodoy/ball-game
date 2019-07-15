@@ -7,16 +7,18 @@ export default class PointerControl implements Control {
     private movement : number
 
     constructor(scene : Phaser.Scene) {
-
         this.scene = scene
+    }
+
+    create() : void {
         this.movement = 0
-        this.width = +scene.scene.manager.game.config.width
+        this.width = +this.scene.scene.manager.game.config.width
 
-        if (!scene.input.activePointer)
-            scene.input.addPointer(1);
+        if (!this.scene.input.activePointer)
+        this.scene.input.addPointer(1);
 
-        scene.input.on('pointerdown', this.handlePointerDown.bind(this))
-        scene.input.on('pointerup', this.handlePointerUp.bind(this))
+        this.scene.input.on('pointerdown', this.handlePointerDown.bind(this))
+        this.scene.input.on('pointerup', this.handlePointerUp.bind(this))
     }
 
     update() : number {
