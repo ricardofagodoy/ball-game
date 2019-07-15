@@ -5,6 +5,8 @@ const LEVEL = Settings.storage.level
 const TIME = Settings.storage.time
 const DIFFICULTY = Settings.storage.difficulty
 
+const DEFAULT_DIFFICULTY = 0.6
+
 export default class LocalStorage implements Storage {
 
     constructor() {
@@ -55,7 +57,7 @@ export default class LocalStorage implements Storage {
 
         const difficulty = window.localStorage.getItem(DIFFICULTY)
 
-        return difficulty ? parseFloat(difficulty) : 0.3
+        return difficulty ? parseFloat(difficulty) : DEFAULT_DIFFICULTY
     }
 
     setDifficulty(difficulty : number) : void {

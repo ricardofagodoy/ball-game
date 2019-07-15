@@ -5,7 +5,7 @@ var phaser = path.join(pathToPhaser, 'dist/phaser.js');
 module.exports = {
   entry: './src/main.ts',
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname),
     filename: 'bundle.js',
   },
   module: {
@@ -16,7 +16,7 @@ module.exports = {
   },
   devServer: {
     contentBase: path.resolve(__dirname, './'),
-    publicPath: '/build/',
+    publicPath: '/',
     host: '0.0.0.0',
     port: 8080,
     open: true

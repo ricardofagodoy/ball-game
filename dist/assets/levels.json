@@ -2,20 +2,43 @@
  "infinite":false,
  "layers":[
         {
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 3, 3, 1, 1, 1, 1, 1, 1, 1],
+         "height":25,
+         "name":"level17",
+         "opacity":1,
+         "properties":
+            {
+             "animationRate":1,
+             "time":1
+            },
+         "propertytypes":
+            {
+             "animationRate":"float",
+             "time":"float"
+            },
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }, 
+        {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 2, 2, 1, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 9, 4, 4, 9, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 0, 0, 0, 2, 2, 2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 2, 2, 2],
          "height":25,
          "name":"level16",
          "opacity":1,
          "properties":
             {
-             "animationRate":1
+             "animationRate":1,
+             "time":10
             },
          "propertytypes":
             {
-             "animationRate":"float"
+             "animationRate":"float",
+             "time":"float"
             },
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":10,
          "x":0,
          "y":0
@@ -27,11 +50,13 @@
          "opacity":1,
          "properties":
             {
-             "animationRate":0.7
+             "animationRate":0.7,
+             "time":10
             },
          "propertytypes":
             {
-             "animationRate":"float"
+             "animationRate":"float",
+             "time":"float"
             },
          "type":"tilelayer",
          "visible":false,
@@ -46,11 +71,13 @@
          "opacity":1,
          "properties":
             {
-             "animationRate":0.6
+             "animationRate":0.6,
+             "time":10
             },
          "propertytypes":
             {
-             "animationRate":"float"
+             "animationRate":"float",
+             "time":"float"
             },
          "type":"tilelayer",
          "visible":false,
@@ -65,11 +92,13 @@
          "opacity":1,
          "properties":
             {
-             "animationRate":0.5
+             "animationRate":0.5,
+             "time":10
             },
          "propertytypes":
             {
-             "animationRate":"float"
+             "animationRate":"float",
+             "time":"float"
             },
          "type":"tilelayer",
          "visible":false,
@@ -84,11 +113,13 @@
          "opacity":1,
          "properties":
             {
-             "animationRate":0.7
+             "animationRate":0.7,
+             "time":10
             },
          "propertytypes":
             {
-             "animationRate":"float"
+             "animationRate":"float",
+             "time":"float"
             },
          "type":"tilelayer",
          "visible":false,
@@ -103,11 +134,13 @@
          "opacity":1,
          "properties":
             {
-             "animationRate":0.8
+             "animationRate":0.8,
+             "time":10
             },
          "propertytypes":
             {
-             "animationRate":"float"
+             "animationRate":"float",
+             "time":"float"
             },
          "type":"tilelayer",
          "visible":false,
@@ -122,11 +155,13 @@
          "opacity":1,
          "properties":
             {
-             "animationRate":0.7
+             "animationRate":1,
+             "time":10
             },
          "propertytypes":
             {
-             "animationRate":"float"
+             "animationRate":"float",
+             "time":"float"
             },
          "type":"tilelayer",
          "visible":false,
@@ -141,11 +176,13 @@
          "opacity":1,
          "properties":
             {
-             "animationRate":1
+             "animationRate":1,
+             "time":10
             },
          "propertytypes":
             {
-             "animationRate":"float"
+             "animationRate":"float",
+             "time":"float"
             },
          "type":"tilelayer",
          "visible":false,
@@ -160,11 +197,13 @@
          "opacity":1,
          "properties":
             {
-             "animationRate":0.7
+             "animationRate":0.7,
+             "time":10
             },
          "propertytypes":
             {
-             "animationRate":"float"
+             "animationRate":"float",
+             "time":"float"
             },
          "type":"tilelayer",
          "visible":false,
@@ -179,11 +218,13 @@
          "opacity":1,
          "properties":
             {
-             "animationRate":0.7
+             "animationRate":0.7,
+             "time":20
             },
          "propertytypes":
             {
-             "animationRate":"float"
+             "animationRate":"float",
+             "time":"float"
             },
          "type":"tilelayer",
          "visible":false,
@@ -198,11 +239,13 @@
          "opacity":1,
          "properties":
             {
-             "animationRate":0.3
+             "animationRate":0.3,
+             "time":11
             },
          "propertytypes":
             {
-             "animationRate":"float"
+             "animationRate":"float",
+             "time":"float"
             },
          "type":"tilelayer",
          "visible":false,
@@ -217,11 +260,13 @@
          "opacity":1,
          "properties":
             {
-             "animationRate":0.5
+             "animationRate":0.5,
+             "time":11
             },
          "propertytypes":
             {
-             "animationRate":"float"
+             "animationRate":"float",
+             "time":"float"
             },
          "type":"tilelayer",
          "visible":false,
@@ -236,11 +281,13 @@
          "opacity":1,
          "properties":
             {
-             "animationRate":0.3
+             "animationRate":0.3,
+             "time":11
             },
          "propertytypes":
             {
-             "animationRate":"float"
+             "animationRate":"float",
+             "time":"float"
             },
          "type":"tilelayer",
          "visible":false,
@@ -253,6 +300,14 @@
          "height":25,
          "name":"level3",
          "opacity":1,
+         "properties":
+            {
+             "time":11
+            },
+         "propertytypes":
+            {
+             "time":"float"
+            },
          "type":"tilelayer",
          "visible":false,
          "width":10,
@@ -264,6 +319,14 @@
          "height":25,
          "name":"level2",
          "opacity":1,
+         "properties":
+            {
+             "time":7
+            },
+         "propertytypes":
+            {
+             "time":"float"
+            },
          "type":"tilelayer",
          "visible":false,
          "width":10,
@@ -277,11 +340,13 @@
          "opacity":1,
          "properties":
             {
-             "gravity":1
+             "gravity":1,
+             "time":3
             },
          "propertytypes":
             {
-             "gravity":"float"
+             "gravity":"float",
+             "time":"float"
             },
          "type":"tilelayer",
          "visible":false,

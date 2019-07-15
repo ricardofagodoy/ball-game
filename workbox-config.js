@@ -1,9 +1,9 @@
 module.exports = {
-  globDirectory: './build/',
+  globDirectory: './dist',
   globPatterns: [
     '\*\*/\*.{html,js}'
   ],
-  swDest: './build/sw.js',
+  swDest: './dist/sw.js',
   clientsClaim: true,
   skipWaiting: true
 };

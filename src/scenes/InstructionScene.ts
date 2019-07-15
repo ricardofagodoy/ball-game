@@ -18,7 +18,6 @@ class InstructionsScene extends Phaser.Scene {
     }
 
     init() {
-
         // Touch controls if possible, else keyboards arrows
         if (this.sys.game.device.input.touch) {
             this.control = new PointerControl(this)
@@ -29,7 +28,7 @@ class InstructionsScene extends Phaser.Scene {
         }
     }
 
-    preload () {
+    create () {
 
         const width = this.width = +this.scene.manager.game.config.width
         const height = +this.scene.manager.game.config.height
@@ -51,6 +50,8 @@ class InstructionsScene extends Phaser.Scene {
         new BackButton(this, {width, height}).on('click', () => {
             this.scene.start('HomeScene')
         })
+
+        this.control.create()
     }
 
     update() {
