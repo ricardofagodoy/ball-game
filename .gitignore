@@ -1,4 +1,9 @@
 .DS_STORE
+!/plugins
+!/plugins/android.json
+!/plugins/fetch.json
+plugins/*
+platforms/*
 build
 node_modules
 cordova/platforms/android
