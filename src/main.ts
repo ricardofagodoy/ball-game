@@ -71,6 +71,10 @@ function onDeviceReady() {
    
    AdMob.banner.prepare()
    AdMob.interstitial.prepare()
+
+   document.addEventListener('admob.interstitial.events.CLOSE', () => {
+     AdMob.interstitial.prepare()
+   })
 }
 
 /* Device ready */

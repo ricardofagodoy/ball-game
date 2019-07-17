@@ -114,7 +114,8 @@ class GameScene extends Phaser.Scene {
         this.ball.on('finish', () => this.onBallFinished())
 
         // Level Text Label
-        new LevelText(this, this.level, this.maxLevel, this.size).on('click', () => this.respawnLevel())
+        new LevelText(this, this.level, this.maxLevel, this.size)
+        //.on('click', () => this.respawnLevel())
 
         // Save Button
         new SaveButton(this, this.size).on('saved', () => this.onSaveButtonPress())
